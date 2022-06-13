@@ -20,16 +20,19 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * const result = addDays(new Date(2014, 8, 1), 10)
  * //=> Thu Sep 11 2014 00:00:00
  */
-export default function addDays(
-  dirtyDate: Date | number,
+export default function addDays<DateType extends Date = Date>(
+  dirtyDate: DateType | number,
   dirtyAmount: number
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   const date = toDate(dirtyDate)
   const amount = toInteger(dirtyAmount)
   if (isNaN(amount)) {
-    return new Date(NaN)
+    return dirtyDate instanceof Date
+      ? // @ts-ignore: TODO find a way to make TypeScript happy about this code
+        new dirtyDate.constructor(NaN)
+      : new Date(NaN)
   }
   if (!amount) {
     // If 0 days, no-op to avoid changing times in the hour before end of DST

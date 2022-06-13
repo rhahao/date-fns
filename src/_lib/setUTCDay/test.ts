@@ -6,14 +6,14 @@ import setUTCDay from '.'
 describe('setUTCDay', () => {
   it('sets the day of the week', () => {
     const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 0)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 31)))
   })
 
   it('allows to specify which day is the first day of the week', () => {
     const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 0, {
       weekStartsOn: 1,
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 7)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 7)))
   })
 
   it('allows to specify which day is the first day of the week in locale', () => {
@@ -23,7 +23,7 @@ describe('setUTCDay', () => {
         options: { weekStartsOn: 1 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 7)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 7)))
   })
 
   it('`options.weekStartsOn` overwrites the first day of the week specified in locale', () => {
@@ -34,48 +34,48 @@ describe('setUTCDay', () => {
         options: { weekStartsOn: 0 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 7)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 7)))
   })
 
   describe('the day index is more than 6', () => {
     it('sets the day of the next week', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 8)
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 8)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 8)))
     })
 
     it('allows to specify which day is the first day of the week', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 7, {
         weekStartsOn: 1,
       })
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 14)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 8)))
     })
 
     it('sets the day of another week in the future', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 14, {
         weekStartsOn: 1,
       })
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 21)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 15)))
     })
   })
 
   describe('the day index is less than 0', () => {
     it('sets the day of the last week', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), -6)
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 25)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 25)))
     })
 
     it('allows to specify which day is the first day of the week', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), -7, {
         weekStartsOn: 1,
       })
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 25)))
     })
 
     it('set the day of another week in the past', () => {
       const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), -14, {
         weekStartsOn: 1,
       })
-      assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 24)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 18)))
     })
   })
 
@@ -84,12 +84,12 @@ describe('setUTCDay', () => {
       new Date(Date.UTC(2014, 8 /* Sep */, 1)).getTime(),
       3
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 3)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 3)))
   })
 
   it('converts a fractional number to an integer', () => {
     const result = setUTCDay(new Date(Date.UTC(2014, 8 /* Sep */, 1)), 0.9)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 31)))
   })
 
   it('implicitly converts number arguments', () => {
@@ -98,7 +98,7 @@ describe('setUTCDay', () => {
       // @ts-expect-error
       '0'
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 31)))
   })
 
   it('implicitly converts options', () => {
@@ -106,13 +106,13 @@ describe('setUTCDay', () => {
       // @ts-expect-error
       weekStartsOn: '1',
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 7)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 7)))
   })
 
   it('does not mutate the original date', () => {
     const date = new Date(Date.UTC(2014, 8 /* Sep */, 1))
     setUTCDay(date, 3)
-    assert.deepStrictEqual(date, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+date, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('returns `Invalid Date` if the given date is invalid', () => {
