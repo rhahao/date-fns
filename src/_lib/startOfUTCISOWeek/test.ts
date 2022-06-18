@@ -7,13 +7,13 @@ describe('startOfUTCISOWeek', () => {
   it('returns the date with the time set to 00:00:00 and the date set to the first day of an ISO week', () => {
     const date = new Date(Date.UTC(2014, 8 /* Sep */, 2, 11, 55, 0))
     const result = startOfUTCISOWeek(date)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('accepts a timestamp', () => {
     const date = new Date(Date.UTC(2014, 1 /* Feb */, 11, 11, 55, 0)).getTime()
     const result = startOfUTCISOWeek(date)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 1 /* Feb */, 10)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 1 /* Feb */, 10)))
   })
 
   it('does not mutate the original date', () => {

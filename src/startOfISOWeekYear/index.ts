@@ -23,11 +23,15 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * const result = startOfISOWeekYear(new Date(2005, 6, 2))
  * //=> Mon Jan 03 2005 00:00:00
  */
-export default function startOfISOWeekYear(dirtyDate: Date | number): Date {
+export default function startOfISOWeekYear<DateType extends Date>(
+  dirtyDate: DateType | number
+): DateType {
   requiredArgs(1, arguments)
 
   const year = getISOWeekYear(dirtyDate)
-  const fourthOfJanuary = new Date(0)
+  const fourthOfJanuary: DateType =
+    // @ts-ignore: TODO find a way to make TypeScript happy about this code
+    dirtyDate instanceof Date ? new dirtyDate.constructor(0) : new Date(0)
   fourthOfJanuary.setFullYear(year, 0, 4)
   fourthOfJanuary.setHours(0, 0, 0, 0)
   const date = startOfISOWeek(fourthOfJanuary)
