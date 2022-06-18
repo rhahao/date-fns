@@ -1,17 +1,17 @@
-import toInteger from '../toInteger/index'
-import toDate from '../../toDate/index'
-import getUTCISOWeek from '../getUTCISOWeek/index'
+import { UTCDate } from '@date-fns/utc'
+import setISOWeek from '../../setISOWeek/index'
 import requiredArgs from '../requiredArgs/index'
 
 export default function setUTCISOWeek(
-  dirtyDate: Date | number,
-  dirtyISOWeek: number
+  date: Date | number,
+  isoWeek: number
 ): Date {
   requiredArgs(2, arguments)
 
-  const date = toDate(dirtyDate)
-  const isoWeek = toInteger(dirtyISOWeek)
-  const diff = getUTCISOWeek(date) - isoWeek
-  date.setUTCDate(date.getUTCDate() - diff * 7)
-  return date
+  return new Date(
+    setISOWeek(
+      new UTCDate(date instanceof Date ? date.getTime() : date),
+      isoWeek
+    ).getTime()
+  )
 }

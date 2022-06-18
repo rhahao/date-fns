@@ -6,7 +6,7 @@ import setUTCISOWeek from '.'
 describe('setUTCISOWeek', () => {
   it('sets the ISO week', () => {
     const result = setUTCISOWeek(new Date(Date.UTC(2004, 7 /* Aug */, 7)), 53)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2005, 0 /* Jan */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2005, 0 /* Jan */, 1)))
   })
 
   it('accepts a timestamp', () => {
@@ -14,7 +14,7 @@ describe('setUTCISOWeek', () => {
       new Date(Date.UTC(2009, 11 /* Dec */, 2)).getTime(),
       1
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2008, 11 /* Dec */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2008, 11 /* Dec */, 31)))
   })
 
   it('converts a fractional number to an integer', () => {
@@ -22,7 +22,7 @@ describe('setUTCISOWeek', () => {
       new Date(Date.UTC(2004, 7 /* Aug */, 7)),
       53.53
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2005, 0 /* Jan */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2005, 0 /* Jan */, 1)))
   })
 
   it('implicitly converts number arguments', () => {
@@ -31,7 +31,7 @@ describe('setUTCISOWeek', () => {
       // @ts-expect-error
       '53'
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2005, 0 /* Jan */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2005, 0 /* Jan */, 1)))
   })
 
   it('does not mutate the original date', () => {
