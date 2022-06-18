@@ -10,11 +10,5 @@ export default function setUTCDay(
 ): Date {
   requiredArgs(2, arguments)
 
-  return new Date(
-    setDay(
-      new UTCDate(date instanceof Date ? date.getTime() : date),
-      day,
-      options
-    ).getTime()
-  )
+  return new Date(setDay(new UTCDate(date), day, options).getTime())
 }

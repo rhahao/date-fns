@@ -9,10 +9,5 @@ export default function startOfUTCWeek(
 ): Date {
   requiredArgs(1, arguments)
 
-  return new Date(
-    startOfWeek(
-      new UTCDate(date instanceof Date ? date.getTime() : date),
-      options
-    ).getTime()
-  )
+  return new Date(startOfWeek(new UTCDate(date), options).getTime())
 }

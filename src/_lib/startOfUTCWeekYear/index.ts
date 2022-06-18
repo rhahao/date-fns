@@ -13,10 +13,5 @@ export default function startOfUTCWeekYear(
 ): Date {
   requiredArgs(1, arguments)
 
-  return new Date(
-    startOfWeekYear(
-      new UTCDate(date instanceof Date ? date.getTime() : date),
-      options
-    ).getTime()
-  )
+  return new Date(startOfWeekYear(new UTCDate(date), options).getTime())
 }

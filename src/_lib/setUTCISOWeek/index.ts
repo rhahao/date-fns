@@ -8,10 +8,5 @@ export default function setUTCISOWeek(
 ): Date {
   requiredArgs(2, arguments)
 
-  return new Date(
-    setISOWeek(
-      new UTCDate(date instanceof Date ? date.getTime() : date),
-      isoWeek
-    ).getTime()
-  )
+  return new Date(setISOWeek(new UTCDate(date), isoWeek).getTime())
 }

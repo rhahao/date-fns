@@ -4,7 +4,5 @@ import requiredArgs from '../requiredArgs/index'
 
 export default function getUTCISOWeekYear(date: Date | number): number {
   requiredArgs(1, arguments)
-  return getISOWeekYear(
-    new UTCDate(date instanceof Date ? date.getTime() : date)
-  )
+  return getISOWeekYear(new UTCDate(date))
 }

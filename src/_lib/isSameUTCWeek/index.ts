@@ -10,12 +10,8 @@ export default function isSameUTCWeek(
 ): boolean {
   requiredArgs(2, arguments)
   return isSameWeek(
-    new UTCDate(
-      dirtyDateLeft instanceof Date ? dirtyDateLeft.getTime() : dirtyDateLeft
-    ),
-    new UTCDate(
-      dirtyDateRight instanceof Date ? dirtyDateRight.getTime() : dirtyDateRight
-    ),
+    new UTCDate(dirtyDateLeft),
+    new UTCDate(dirtyDateRight),
     options
   )
 }

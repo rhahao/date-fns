@@ -1,3 +1,4 @@
+import { UTCDate } from '@date-fns/utc'
 import getWeek from '../../getWeek/index'
 import type {
   FirstWeekContainsDateOptions,
@@ -11,5 +12,5 @@ export default function getUTCWeek(
   options?: LocaleOptions & WeekStartOptions & FirstWeekContainsDateOptions
 ): number {
   requiredArgs(1, arguments)
-  return getWeek(date, options)
+  return getWeek(new UTCDate(date), options)
 }

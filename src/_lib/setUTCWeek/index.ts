@@ -14,11 +14,5 @@ export default function setUTCWeek(
 ): Date {
   requiredArgs(2, arguments)
 
-  return new Date(
-    setWeek(
-      new UTCDate(date instanceof Date ? date.getTime() : date),
-      week,
-      options
-    ).getTime()
-  )
+  return new Date(setWeek(new UTCDate(date), week, options).getTime())
 }
