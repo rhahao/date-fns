@@ -48,10 +48,10 @@ import { getDefaultOptions } from '../_lib/defaultOptions/index'
  * })
  * //=> Mon Jan 03 2005 00:00:00
  */
-export default function startOfWeekYear(
-  dirtyDate: Date | number,
+export default function startOfWeekYear<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: LocaleOptions & FirstWeekContainsDateOptions & WeekStartOptions
-): Date {
+): DateType {
   requiredArgs(1, arguments)
 
   const defaultOptions = getDefaultOptions()
@@ -64,7 +64,9 @@ export default function startOfWeekYear(
   )
 
   const year = getWeekYear(dirtyDate, options)
-  const firstWeek = new Date(0)
+  const firstWeek =
+    // @ts-ignore: TODO find a way to make TypeScript happy about this code
+    dirtyDate instanceof Date ? new dirtyDate.constructor(0) : new Date(0)
   firstWeek.setFullYear(year, 0, firstWeekContainsDate)
   firstWeek.setHours(0, 0, 0, 0)
   const date = startOfWeek(firstWeek, options)

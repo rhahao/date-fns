@@ -6,24 +6,24 @@ import startOfUTCWeekYear from '.'
 describe('startOfUTCWeekYear', () => {
   it('returns the date with the time set to 00:00:00 and the date set to the first day of a week year', () => {
     const result = startOfUTCWeekYear(new Date(Date.UTC(2005, 6 /* Jul */, 2)))
-    assert.deepStrictEqual(
-      result,
-      new Date(Date.UTC(2004, 11 /* Dec */, 26, 0, 0, 0, 0))
+    assert.strictEqual(
+      +result,
+      +new Date(Date.UTC(2004, 11 /* Dec */, 26, 0, 0, 0, 0))
     )
   })
 
   it('accepts a timestamp', () => {
     const result = startOfUTCWeekYear(Date.UTC(2005, 0 /* Jan */, 1, 6, 0))
-    assert.deepStrictEqual(
-      result,
-      new Date(Date.UTC(2004, 11 /* Dec */, 26, 0, 0, 0, 0))
+    assert.strictEqual(
+      +result,
+      +new Date(Date.UTC(2004, 11 /* Dec */, 26, 0, 0, 0, 0))
     )
   })
 
   it('does not mutate the original date', () => {
     const date = new Date(Date.UTC(2014, 6 /* Jul */, 2))
     startOfUTCWeekYear(date)
-    assert.deepStrictEqual(date, new Date(Date.UTC(2014, 6 /* Jul */, 2)))
+    assert.strictEqual(+date, +new Date(Date.UTC(2014, 6 /* Jul */, 2)))
   })
 
   it('handles dates before 100 AD', () => {
@@ -34,7 +34,7 @@ describe('startOfUTCWeekYear', () => {
     expectedResult.setUTCFullYear(8, 11 /* Dec */, 28)
     expectedResult.setUTCHours(0, 0, 0, 0)
     const result = startOfUTCWeekYear(initialDate)
-    assert.deepStrictEqual(result, expectedResult)
+    assert.strictEqual(+result, +expectedResult)
   })
 
   it('returns `Invalid Date` if the given date is invalid', () => {
@@ -50,9 +50,9 @@ describe('startOfUTCWeekYear', () => {
         options: { weekStartsOn: 1, firstWeekContainsDate: 4 },
       },
     })
-    assert.deepStrictEqual(
-      result,
-      new Date(Date.UTC(2005, 0 /* Jan */, 3, 0, 0, 0, 0))
+    assert.strictEqual(
+      +result,
+      +new Date(Date.UTC(2005, 0 /* Jan */, 3, 0, 0, 0, 0))
     )
   })
 
@@ -66,9 +66,9 @@ describe('startOfUTCWeekYear', () => {
         options: { weekStartsOn: 0, firstWeekContainsDate: 1 },
       },
     })
-    assert.deepStrictEqual(
-      result,
-      new Date(Date.UTC(2005, 0 /* Jan */, 3, 0, 0, 0, 0))
+    assert.strictEqual(
+      +result,
+      +new Date(Date.UTC(2005, 0 /* Jan */, 3, 0, 0, 0, 0))
     )
   })
 
