@@ -7,13 +7,13 @@ describe('startOfUTCWeek', () => {
   it('returns the date with the time set to 00:00:00 and the date set to the first day of a week', () => {
     const date = new Date(Date.UTC(2014, 8 /* Sep */, 2, 11, 55, 0))
     const result = startOfUTCWeek(date)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 31)))
   })
 
   it('allows to specify which day is the first day of the week', () => {
     const date = new Date(Date.UTC(2014, 8 /* Sep */, 2, 11, 55, 0))
     const result = startOfUTCWeek(date, { weekStartsOn: 1 })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('allows to specify which day is the first day of the week in locale', () => {
@@ -24,7 +24,7 @@ describe('startOfUTCWeek', () => {
         options: { weekStartsOn: 1 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('`options.weekStartsOn` overwrites the first day of the week specified in locale', () => {
@@ -36,7 +36,7 @@ describe('startOfUTCWeek', () => {
         options: { weekStartsOn: 0 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('implicitly converts options', () => {
@@ -45,13 +45,13 @@ describe('startOfUTCWeek', () => {
       // @ts-expect-error: Type 'string' is not assignable to type 'Day | undefined'.
       weekStartsOn: '1',
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 8 /* Sep */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 8 /* Sep */, 1)))
   })
 
   it('accepts a timestamp', () => {
     const date = new Date(Date.UTC(2014, 8 /* Sep */, 2, 11, 55, 0)).getTime()
     const result = startOfUTCWeek(date)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2014, 7 /* Aug */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2014, 7 /* Aug */, 31)))
   })
 
   it('does not mutate the original date', () => {
@@ -68,7 +68,7 @@ describe('startOfUTCWeek', () => {
       it('it returns the start of a week', () => {
         const date = new Date(Date.UTC(2014, 9 /* Oct */, 6))
         const result = startOfUTCWeek(date, { weekStartsOn: 3 })
-        assert.deepStrictEqual(result, new Date(Date.UTC(2014, 9 /* Oct */, 1)))
+        assert.strictEqual(+result, +new Date(Date.UTC(2014, 9 /* Oct */, 1)))
       })
     })
 
@@ -76,7 +76,7 @@ describe('startOfUTCWeek', () => {
       it('it returns the start of a week', () => {
         const date = new Date(Date.UTC(2014, 9 /* Oct */, 8))
         const result = startOfUTCWeek(date, { weekStartsOn: 3 })
-        assert.deepStrictEqual(result, new Date(Date.UTC(2014, 9 /* Oct */, 8)))
+        assert.strictEqual(+result, +new Date(Date.UTC(2014, 9 /* Oct */, 8)))
       })
     })
 
@@ -84,14 +84,14 @@ describe('startOfUTCWeek', () => {
       it('it returns the start of a week', () => {
         const date = new Date(Date.UTC(2014, 9 /* Oct */, 10))
         const result = startOfUTCWeek(date, { weekStartsOn: 3 })
-        assert.deepStrictEqual(result, new Date(Date.UTC(2014, 9 /* Oct */, 8)))
+        assert.strictEqual(+result, +new Date(Date.UTC(2014, 9 /* Oct */, 8)))
       })
     })
 
     it('handles the week at the start of a year', () => {
       const date = new Date(Date.UTC(2014, 0 /* Jan */, 1))
       const result = startOfUTCWeek(date)
-      assert.deepStrictEqual(result, new Date(Date.UTC(2013, 11 /* Dec */, 29)))
+      assert.strictEqual(+result, +new Date(Date.UTC(2013, 11 /* Dec */, 29)))
     })
   })
 
