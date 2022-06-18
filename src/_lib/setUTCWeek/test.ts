@@ -6,17 +6,17 @@ import setUTCWeek from '.'
 describe('setUTCWeek', () => {
   it('sets the local week', () => {
     const result = setUTCWeek(new Date(Date.UTC(2005, 0 /* Jan */, 2)), 1)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2004, 11 /* Dec */, 26)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2004, 11 /* Dec */, 26)))
   })
 
   it('accepts a timestamp', () => {
     const result = setUTCWeek(Date.UTC(2009, 11 /* Dec */, 2), 1)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2008, 11 /* Dec */, 31)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2008, 11 /* Dec */, 31)))
   })
 
   it('converts a fractional number to an integer', () => {
     const result = setUTCWeek(new Date(Date.UTC(2005, 0 /* Jan */, 2)), 1.1)
-    assert.deepStrictEqual(result, new Date(Date.UTC(2004, 11 /* Dec */, 26)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2004, 11 /* Dec */, 26)))
   })
 
   it('implicitly converts number arguments', () => {
@@ -25,7 +25,7 @@ describe('setUTCWeek', () => {
       // @ts-expect-error
       '53'
     )
-    assert.deepStrictEqual(result, new Date(Date.UTC(2005, 0 /* Jan */, 1)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2005, 0 /* Jan */, 1)))
   })
 
   it('does not mutate the original date', () => {
@@ -63,7 +63,7 @@ describe('setUTCWeek', () => {
         options: { weekStartsOn: 1, firstWeekContainsDate: 4 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2004, 0 /* Jan */, 4)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2004, 0 /* Jan */, 4)))
   })
 
   it('`options.weekStartsOn` overwrites the first day of the week specified in locale', () => {
@@ -76,7 +76,7 @@ describe('setUTCWeek', () => {
         options: { weekStartsOn: 0, firstWeekContainsDate: 1 },
       },
     })
-    assert.deepStrictEqual(result, new Date(Date.UTC(2004, 0 /* Jan */, 4)))
+    assert.strictEqual(+result, +new Date(Date.UTC(2004, 0 /* Jan */, 4)))
   })
 
   it('throws `RangeError` if `options.weekStartsOn` is not convertable to 0, 1, ..., 6 or undefined', () => {

@@ -1,23 +1,24 @@
-import toInteger from '../toInteger/index'
-import toDate from '../../toDate/index'
-import getUTCWeek from '../getUTCWeek/index'
-import requiredArgs from '../requiredArgs/index'
+import { UTCDate } from '@date-fns/utc'
+import setWeek from '../../setWeek'
 import type {
+  FirstWeekContainsDateOptions,
   LocaleOptions,
   WeekStartOptions,
-  FirstWeekContainsDateOptions,
 } from '../../types'
+import requiredArgs from '../requiredArgs/index'
 
 export default function setUTCWeek(
-  dirtyDate: Date | number,
-  dirtyWeek: number,
+  date: Date | number,
+  week: number,
   options?: LocaleOptions & WeekStartOptions & FirstWeekContainsDateOptions
 ): Date {
   requiredArgs(2, arguments)
 
-  const date = toDate(dirtyDate)
-  const week = toInteger(dirtyWeek)
-  const diff = getUTCWeek(date, options) - week
-  date.setUTCDate(date.getUTCDate() - diff * 7)
-  return date
+  return new Date(
+    setWeek(
+      new UTCDate(date instanceof Date ? date.getTime() : date),
+      week,
+      options
+    ).getTime()
+  )
 }
