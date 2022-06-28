@@ -8,11 +8,11 @@ import type {
   WeekStartOptions,
   Day,
 } from '../../../types'
-import getUTCDayOfYear from '../../../_lib/getUTCDayOfYear/index'
-import getUTCISOWeek from '../../../_lib/getUTCISOWeek/index'
-import getUTCISOWeekYear from '../../../_lib/getUTCISOWeekYear/index'
-import getUTCWeek from '../../../_lib/getUTCWeek/index'
-import getUTCWeekYear from '../../../_lib/getUTCWeekYear/index'
+import getDayOfYear from '../../../getDayOfYear/index'
+import getISOWeek from '../../../getISOWeek/index'
+import getISOWeekYear from '../../../getISOWeekYear/index'
+import getWeek from '../../../getWeek/index'
+import getWeekYear from '../../../getWeekYear/index'
 import addLeadingZeros from '../../addLeadingZeros/index'
 import lightFormatters from '../lightFormatters/index'
 
@@ -119,7 +119,7 @@ const formatters: { [token: string]: Formatter } = {
 
   // Local week-numbering year
   Y: function (date, token, localize, options) {
-    const signedWeekYear = getUTCWeekYear(date, options)
+    const signedWeekYear = getWeekYear(date, options)
     // Returns 1 for 1 BC (which is year 0 in JavaScript)
     const weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear
 
@@ -140,7 +140,7 @@ const formatters: { [token: string]: Formatter } = {
 
   // ISO week-numbering year
   R: function (date, token) {
-    const isoWeekYear = getUTCISOWeekYear(date)
+    const isoWeekYear = getISOWeekYear(date)
 
     // Padding
     return addLeadingZeros(isoWeekYear, token.length)
@@ -287,7 +287,7 @@ const formatters: { [token: string]: Formatter } = {
 
   // Local week of year
   w: function (date, token, localize, options) {
-    const week = getUTCWeek(date, options)
+    const week = getWeek(date, options)
 
     if (token === 'wo') {
       return localize.ordinalNumber(week, { unit: 'week' })
@@ -298,7 +298,7 @@ const formatters: { [token: string]: Formatter } = {
 
   // ISO week of year
   I: function (date, token, localize) {
-    const isoWeek = getUTCISOWeek(date)
+    const isoWeek = getISOWeek(date)
 
     if (token === 'Io') {
       return localize.ordinalNumber(isoWeek, { unit: 'week' })
@@ -318,7 +318,7 @@ const formatters: { [token: string]: Formatter } = {
 
   // Day of year
   D: function (date, token, localize) {
-    const dayOfYear = getUTCDayOfYear(date)
+    const dayOfYear = getDayOfYear(date)
 
     if (token === 'Do') {
       return localize.ordinalNumber(dayOfYear, { unit: 'dayOfYear' })

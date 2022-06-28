@@ -1,3 +1,4 @@
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import isValid from '../isValid/index'
 import subMilliseconds from '../subMilliseconds/index'
 import toDate from '../toDate/index'
@@ -9,7 +10,6 @@ import {
   isProtectedWeekYearToken,
   throwProtectedError,
 } from '../_lib/protectedTokens/index'
-import toInteger from '../_lib/toInteger/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import type {
   FirstWeekContainsDateOptions,
@@ -21,6 +21,7 @@ import type {
 } from '../types'
 import { getDefaultOptions } from '../_lib/defaultOptions/index'
 import defaultLocale from '../_lib/defaultLocale/index'
+import toInteger from '../_lib/toInteger'
 
 // This RegExp consists of three parts separated by `|`:
 // - [yYQqMLwIdDecihHKkms]o matches any available ordinal number token
@@ -396,7 +397,7 @@ export default function format(
   // This ensures that when UTC functions will be implemented, locales will be compatible with them.
   // See an issue about UTC functions: https://github.com/date-fns/date-fns/issues/376
   const timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate)
-  const utcDate = subMilliseconds(originalDate, timezoneOffset)
+  const utcDate = new UTCDateMini(subMilliseconds(originalDate, timezoneOffset))
 
   const formatterOptions = {
     firstWeekContainsDate: firstWeekContainsDate as FirstWeekContainsDate,
