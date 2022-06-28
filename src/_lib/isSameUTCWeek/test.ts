@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import assert from 'assert'
-import isSameUTCWeek from '.'
+import isSameUTCWeek from './index'
 
 describe('isSameUTCWeek', () => {
   it('returns true if the given dates have the same week', () => {
