@@ -1,14 +1,15 @@
-import isSameUTCWeek from '../../../../_lib/isSameUTCWeek/index'
+import type { UTCDateMini } from '@date-fns/utc'
+import isSameWeek from '../../../../isSameWeek/index'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'
 
 function checkWeek(
-  date: Date,
-  baseDate: Date,
+  date: UTCDateMini,
+  baseDate: UTCDateMini,
   options?: FormatRelativeFnOptions
 ) {
   const baseFormat = 'eeee p'
 
-  if (isSameUTCWeek(date, baseDate, options)) {
+  if (isSameWeek(date, baseDate, options)) {
     return baseFormat // in same week
   } else if (date.getTime() > baseDate.getTime()) {
     return "'下个'" + baseFormat // in next week

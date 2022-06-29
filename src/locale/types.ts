@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import type { UTCDateMini } from '@date-fns/utc'
 import type {
   Day,
   Era,
@@ -73,8 +74,8 @@ export type FormatDistanceFn = (
 ) => string
 
 export type FormatRelativeTokenFn = (
-  date: Date | number,
-  baseDate: Date | number,
+  date: UTCDateMini | number,
+  baseDate: UTCDateMini | number,
   options?: { weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6 }
 ) => string
 
@@ -93,8 +94,8 @@ export interface FormatRelativeFnOptions {
 
 export type FormatRelativeFn = (
   token: FormatRelativeToken,
-  date: Date,
-  baseDate: Date,
+  date: UTCDateMini,
+  baseDate: UTCDateMini,
   options?: FormatRelativeFnOptions
 ) => string
 

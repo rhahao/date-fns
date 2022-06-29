@@ -1,5 +1,6 @@
+import type { UTCDateMini } from '@date-fns/utc'
+import isSameWeek from '../../../../isSameWeek/index'
 import type { Day } from '../../../../types'
-import isSameUTCWeek from '../../../../_lib/isSameUTCWeek/index'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'
 
 // https://www.unicode.org/cldr/charts/32/summary/sk.html?hide#1308
@@ -50,9 +51,13 @@ function nextWeek(day: Day) {
 }
 
 const formatRelativeLocale = {
-  lastWeek: (date: Date, baseDate: Date, options?: FormatRelativeFnOptions) => {
-    const day = date.getUTCDay() as Day
-    if (isSameUTCWeek(date, baseDate, options)) {
+  lastWeek: (
+    date: UTCDateMini,
+    baseDate: UTCDateMini,
+    options?: FormatRelativeFnOptions
+  ) => {
+    const day = date.getDay() as Day
+    if (isSameWeek(date, baseDate, options)) {
       return thisWeek(day)
     } else {
       return lastWeek(day)
@@ -61,9 +66,13 @@ const formatRelativeLocale = {
   yesterday: "'včera o' p",
   today: "'dnes o' p",
   tomorrow: "'zajtra o' p",
-  nextWeek: (date: Date, baseDate: Date, options?: FormatRelativeFnOptions) => {
-    const day = date.getUTCDay() as Day
-    if (isSameUTCWeek(date, baseDate, options)) {
+  nextWeek: (
+    date: UTCDateMini,
+    baseDate: UTCDateMini,
+    options?: FormatRelativeFnOptions
+  ) => {
+    const day = date.getDay() as Day
+    if (isSameWeek(date, baseDate, options)) {
       return thisWeek(day)
     } else {
       return nextWeek(day)

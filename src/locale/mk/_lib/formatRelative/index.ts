@@ -1,5 +1,6 @@
+import type { UTCDateMini } from '@date-fns/utc'
+import isSameWeek from '../../../../isSameWeek/index'
 import type { Day } from '../../../../types'
-import isSameUTCWeek from '../../../../_lib/isSameUTCWeek/index'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'
 
 const weekdays = [
@@ -62,12 +63,12 @@ function nextWeek(day: Day): string {
 
 const formatRelativeLocale = {
   lastWeek: (
-    date: Date,
-    baseDate: Date,
+    date: UTCDateMini,
+    baseDate: UTCDateMini,
     options?: FormatRelativeFnOptions
   ): string => {
-    const day = date.getUTCDay() as Day
-    if (isSameUTCWeek(date, baseDate, options)) {
+    const day = date.getDay() as Day
+    if (isSameWeek(date, baseDate, options)) {
       return thisWeek(day)
     } else {
       return lastWeek(day)
@@ -77,12 +78,12 @@ const formatRelativeLocale = {
   today: "'денес во' p",
   tomorrow: "'утре во' p",
   nextWeek: (
-    date: Date,
-    baseDate: Date,
+    date: UTCDateMini,
+    baseDate: UTCDateMini,
     options?: FormatRelativeFnOptions
   ): string => {
-    const day = date.getUTCDay() as Day
-    if (isSameUTCWeek(date, baseDate, options)) {
+    const day = date.getDay() as Day
+    if (isSameWeek(date, baseDate, options)) {
       return thisWeek(day)
     } else {
       return nextWeek(day)

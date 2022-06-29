@@ -1,13 +1,14 @@
-import { getDefaultOptions } from '../_lib/defaultOptions/index'
+import { UTCDateMini } from '@date-fns/utc'
 import differenceInCalendarDays from '../differenceInCalendarDays/index'
 import format from '../format/index'
-import defaultLocale from '../_lib/defaultLocale/index'
+import type { FormatRelativeToken } from '../locale/types'
 import subMilliseconds from '../subMilliseconds/index'
 import toDate from '../toDate/index'
+import type { LocaleOptions, WeekStartOptions } from '../types'
+import defaultLocale from '../_lib/defaultLocale/index'
+import { getDefaultOptions } from '../_lib/defaultOptions/index'
 import getTimezoneOffsetInMilliseconds from '../_lib/getTimezoneOffsetInMilliseconds/index'
 import requiredArgs from '../_lib/requiredArgs/index'
-import type { LocaleOptions, WeekStartOptions } from '../types'
-import type { FormatRelativeToken } from '../locale/types'
 import toInteger from '../_lib/toInteger/index'
 
 /**
@@ -101,10 +102,11 @@ export default function formatRelative<DateType extends Date>(
     token = 'other'
   }
 
-  const utcDate = subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
-  const utcBaseDate = subMilliseconds(
-    baseDate,
-    getTimezoneOffsetInMilliseconds(baseDate)
+  const utcDate = new UTCDateMini(
+    subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
+  )
+  const utcBaseDate = new UTCDateMini(
+    subMilliseconds(baseDate, getTimezoneOffsetInMilliseconds(baseDate))
   )
   const formatStr = locale.formatRelative(token, utcDate, utcBaseDate, {
     locale,
