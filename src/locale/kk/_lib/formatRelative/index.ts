@@ -1,4 +1,4 @@
-import type { UTCDateMini } from '@date-fns/utc'
+import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import isSameWeek from '../../../../isSameWeek/index'
 import type { Day } from '../../../../types'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'

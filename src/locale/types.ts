@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import type { UTCDateMini } from '@date-fns/utc'
+import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type {
   Day,
   Era,

@@ -1,4 +1,4 @@
-import type { UTCDateMini } from '@date-fns/utc'
+import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import type { Era } from '../../../types'
 import { Parser } from '../Parser'

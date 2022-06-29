@@ -1,4 +1,4 @@
-import type { UTCDateMini } from '@date-fns/utc'
+import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import setWeek from '../../../setWeek/index'
 import startOfWeek from '../../../startOfWeek/index'

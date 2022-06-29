@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import startOfISOWeek from '../../../startOfISOWeek/index'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'

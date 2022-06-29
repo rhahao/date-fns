@@ -3,7 +3,7 @@ import type { ParseResult, ParseFlags } from '../types'
 import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
 import { parseNumericPattern, parseNDigits } from '../utils'
-import type { UTCDateMini } from '@date-fns/utc'
+import type { UTCDateMini } from '@date-fns/utc/date/mini'
 
 export class MinuteParser extends Parser<number> {
   priority = 60

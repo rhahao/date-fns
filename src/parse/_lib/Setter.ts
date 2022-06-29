@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { ParseFlags, ParserOptions } from './types'
 
 const TIMEZONE_UNIT_PRIORITY = 10
