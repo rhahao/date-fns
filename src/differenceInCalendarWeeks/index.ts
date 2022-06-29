@@ -40,9 +40,9 @@ const MILLISECONDS_IN_WEEK = 604800000
  * )
  * //=> 2
  */
-export default function differenceInCalendarWeeks(
-  dirtyDateLeft: Date | number,
-  dirtyDateRight: Date | number,
+export default function differenceInCalendarWeeks<DateType extends Date>(
+  dirtyDateLeft: DateType | number,
+  dirtyDateRight: DateType | number,
   options?: LocaleOptions & WeekStartOptions
 ): number {
   requiredArgs(2, arguments)

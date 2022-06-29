@@ -23,9 +23,9 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * ])
  * //=> Tue Jan 01 2030 00:00:00
  */
-export default function closestTo(
-  dirtyDateToCompare: Date | number,
-  dirtyDatesArray: Array<Date | number>
+export default function closestTo<DateType extends Date>(
+  dirtyDateToCompare: DateType | number,
+  dirtyDatesArray: Array<DateType | number>
 ): Date | undefined {
   requiredArgs(2, arguments)
 

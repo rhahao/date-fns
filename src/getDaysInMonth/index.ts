@@ -18,7 +18,9 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * const result = getDaysInMonth(new Date(2000, 1))
  * //=> 29
  */
-export default function getDaysInMonth(dirtyDate: Date | number): number {
+export default function getDaysInMonth<DateType extends Date>(
+  dirtyDate: DateType | number
+): number {
   requiredArgs(1, arguments)
 
   const date = toDate(dirtyDate)

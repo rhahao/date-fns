@@ -48,8 +48,8 @@ import { getDefaultOptions } from '../_lib/defaultOptions/index'
  * const result = getWeekYear(new Date(2004, 11, 26), { firstWeekContainsDate: 4 })
  * //=> 2004
  */
-export default function getWeekYear(
-  dirtyDate: Date | number,
+export default function getWeekYear<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: LocaleOptions & WeekStartOptions & FirstWeekContainsDateOptions
 ): number {
   requiredArgs(1, arguments)

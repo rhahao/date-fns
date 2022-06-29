@@ -10,9 +10,9 @@ export interface Duration {
   seconds?: number
 }
 
-export interface Interval {
-  start: Date | number
-  end: Date | number
+export interface Interval<DateType extends Date = Date> {
+  start: DateType | number
+  end: DateType | number
 }
 
 export interface StepOptions {

@@ -34,9 +34,9 @@ const MILLISECONDS_IN_DAY = 86400000
  * )
  * //=> 1
  */
-export default function differenceInCalendarDays(
-  dirtyDateLeft: Date | number,
-  dirtyDateRight: Date | number
+export default function differenceInCalendarDays<DateType extends Date>(
+  dirtyDateLeft: DateType | number,
+  dirtyDateRight: DateType | number
 ): number {
   requiredArgs(2, arguments)
 

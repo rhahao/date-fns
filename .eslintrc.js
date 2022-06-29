@@ -18,5 +18,6 @@ module.exports = {
   rules: {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-redeclare': 'off',
+    'prefer-rest-params': 'off',
   },
 }

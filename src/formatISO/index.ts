@@ -41,8 +41,8 @@ import requiredArgs from '../_lib/requiredArgs'
  * const result = formatISO(new Date(2019, 8, 18, 19, 0, 52), { representation: 'time' })
  * //=> '19:00:52Z'
  */
-export default function formatISO(
-  date: Date | number,
+export default function formatISO<DateType extends Date>(
+  date: DateType | number,
   options?: FormatOptions & RepresentationOptions
 ): string {
   requiredArgs(1, arguments)

@@ -1,5 +1,6 @@
 import getISOWeekYear from '../getISOWeekYear/index'
 import startOfISOWeek from '../startOfISOWeek/index'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 
 /**
@@ -29,9 +30,7 @@ export default function startOfISOWeekYear<DateType extends Date>(
   requiredArgs(1, arguments)
 
   const year = getISOWeekYear(dirtyDate)
-  const fourthOfJanuary: DateType =
-    // @ts-ignore: TODO find a way to make TypeScript happy about this code
-    dirtyDate instanceof Date ? new dirtyDate.constructor(0) : new Date(0)
+  const fourthOfJanuary = dateFrom(dirtyDate, 0)
   fourthOfJanuary.setFullYear(year, 0, 4)
   fourthOfJanuary.setHours(0, 0, 0, 0)
   const date = startOfISOWeek(fourthOfJanuary)

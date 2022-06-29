@@ -35,9 +35,9 @@ import { getRoundingMethod } from '../_lib/roundingMethods/index'
  * )
  * //=> -1
  */
-export default function differenceInMinutes(
-  dateLeft: Date | number,
-  dateRight: Date | number,
+export default function differenceInMinutes<DateType extends Date>(
+  dateLeft: DateType | number,
+  dateRight: DateType | number,
   options?: RoundingOptions
 ): number {
   requiredArgs(2, arguments)

@@ -1,9 +1,10 @@
+import isSaturday from '../isSaturday/index'
+import isSunday from '../isSunday/index'
 import isWeekend from '../isWeekend/index'
 import toDate from '../toDate/index'
-import toInteger from '../_lib/toInteger/index'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
-import isSunday from '../isSunday/index'
-import isSaturday from '../isSaturday/index'
+import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name addBusinessDays
@@ -23,17 +24,17 @@ import isSaturday from '../isSaturday/index'
  * const result = addBusinessDays(new Date(2014, 8, 1), 10)
  * //=> Mon Sep 15 2014 00:00:00 (skipped weekend days)
  */
-export default function addBusinessDays(
-  dirtyDate: Date | number,
+export default function addBusinessDays<DateType extends Date>(
+  dirtyDate: DateType | number,
   dirtyAmount: number
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   const date = toDate(dirtyDate)
   const startedOnWeekend = isWeekend(date)
   const amount = toInteger(dirtyAmount)
 
-  if (isNaN(amount)) return new Date(NaN)
+  if (isNaN(amount)) return dateFrom(dirtyDate, NaN)
 
   const hours = date.getHours()
   const sign = amount < 0 ? -1 : 1

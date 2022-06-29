@@ -37,9 +37,9 @@ import type { WeekStartOptions, LocaleOptions } from '../types'
  * const result = isSameWeek(new Date(2014, 0, 1), new Date(2015, 0, 1))
  * //=> false
  */
-export default function isSameWeek(
-  dirtyDateLeft: Date | number,
-  dirtyDateRight: Date | number,
+export default function isSameWeek<DateType extends Date>(
+  dirtyDateLeft: DateType | number,
+  dirtyDateRight: DateType | number,
   options?: LocaleOptions & WeekStartOptions
 ): boolean {
   requiredArgs(2, arguments)

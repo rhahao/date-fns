@@ -95,9 +95,9 @@ const MINUTES_IN_YEAR = MINUTES_IN_DAY * 365
  * //=> '1 jaro'
  */
 
-export default function formatDistanceStrict(
-  dirtyDate: Date | number,
-  dirtyBaseDate: Date | number,
+export default function formatDistanceStrict<DateType extends Date>(
+  dirtyDate: DateType | number,
+  dirtyBaseDate: DateType | number,
   options?: LocaleOptions & FormatDistanceStrictOptions
 ): string {
   requiredArgs(2, arguments)

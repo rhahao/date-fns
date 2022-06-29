@@ -1,9 +1,10 @@
 import addDays from '../addDays/index'
 import addMonths from '../addMonths/index'
 import toDate from '../toDate/index'
+import type { Duration } from '../types'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import toInteger from '../_lib/toInteger/index'
-import type { Duration } from '../types'
 
 /**
  * @name add
@@ -44,13 +45,13 @@ import type { Duration } from '../types'
  * })
  * //=> Thu Jun 15 2017 15:29:20
  */
-export default function add(
-  dirtyDate: Date | number,
+export default function add<DateType extends Date>(
+  dirtyDate: DateType | number,
   duration: Duration
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
-  if (!duration || typeof duration !== 'object') return new Date(NaN)
+  if (!duration || typeof duration !== 'object') return dateFrom(dirtyDate, NaN)
 
   const years = duration.years ? toInteger(duration.years) : 0
   const months = duration.months ? toInteger(duration.months) : 0
@@ -73,7 +74,7 @@ export default function add(
   const minutesToAdd = minutes + hours * 60
   const secondsToAdd = seconds + minutesToAdd * 60
   const msToAdd = secondsToAdd * 1000
-  const finalDate = new Date(dateWithDays.getTime() + msToAdd)
+  const finalDate = dateFrom(dirtyDate, dateWithDays.getTime() + msToAdd)
 
   return finalDate
 }

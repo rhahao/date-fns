@@ -51,11 +51,11 @@ import { getDefaultOptions } from '../_lib/defaultOptions/index'
  * })
  * //=> Sat Jan 01 2005 00:00:00
  */
-export default function setWeekYear(
-  dirtyDate: Date | number,
+export default function setWeekYear<DateType extends Date>(
+  dirtyDate: DateType | number,
   dirtyWeekYear: number,
   options?: LocaleOptions & WeekStartOptions & FirstWeekContainsDateOptions
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   const defaultOptions = getDefaultOptions()

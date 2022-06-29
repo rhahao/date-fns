@@ -41,8 +41,8 @@ import { FormatOptions, RepresentationOptions } from '../types'
  * const result = formatISO9075(new Date(2019, 8, 18, 19, 0, 52), { representation: 'time' })
  * //=> '19:00:52'
  */
-export default function formatISO9075(
-  dirtyDate: Date | number,
+export default function formatISO9075<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: FormatOptions & RepresentationOptions
 ): string {
   if (arguments.length < 1) {

@@ -96,9 +96,9 @@ const MINUTES_IN_TWO_MONTHS = 86400
  * //=> 'pli ol 1 jaro'
  */
 
-export default function formatDistance(
-  dirtyDate: Date | number,
-  dirtyBaseDate: Date | number,
+export default function formatDistance<DateType extends Date>(
+  dirtyDate: DateType | number,
+  dirtyBaseDate: DateType | number,
   options?: LocaleOptions & FormatDistanceOptions
 ): string {
   requiredArgs(2, arguments)

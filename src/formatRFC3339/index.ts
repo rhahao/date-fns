@@ -2,7 +2,7 @@ import toDate from '../toDate/index'
 import isValid from '../isValid/index'
 import addLeadingZeros from '../_lib/addLeadingZeros/index'
 import toInteger from '../_lib/toInteger/index'
-import { FormatRFC3339Options } from 'src/types'
+import { FormatRFC3339Options } from '../types'
 
 /**
  * @name formatRFC3339
@@ -35,8 +35,8 @@ import { FormatRFC3339Options } from 'src/types'
  * const result = formatRFC3339(new Date(2019, 8, 18, 19, 0, 52, 234), { fractionDigits: 3 })
  * //=> '2019-09-18T19:00:52.234Z'
  */
-export default function formatRFC3339(
-  dirtyDate: Date | number,
+export default function formatRFC3339<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: FormatRFC3339Options
 ): string {
   if (arguments.length < 1) {

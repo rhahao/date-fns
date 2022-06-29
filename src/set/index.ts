@@ -3,6 +3,7 @@ import setMonth from '../setMonth/index'
 import toInteger from '../_lib/toInteger/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import type { DateValues } from '../types'
+import dateFrom from '../_lib/dateFrom/index'
 
 /**
  * @name set
@@ -42,10 +43,11 @@ import type { DateValues } from '../types'
  * const result = set(new Date(2014, 8, 1, 1, 23, 45), { hours: 12 })
  * //=> Mon Sep 01 2014 12:23:45
  */
-export default function set(
-  dirtyDate: Date | number,
+
+export default function set<DateType extends Date>(
+  dirtyDate: DateType | number,
   values: DateValues
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   if (typeof values !== 'object' || values === null) {
@@ -56,7 +58,7 @@ export default function set(
 
   // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
   if (isNaN(date.getTime())) {
-    return new Date(NaN)
+    return dateFrom(dirtyDate, NaN)
   }
 
   if (values.year != null) {

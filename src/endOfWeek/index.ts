@@ -31,10 +31,10 @@ import type { LocaleOptions, WeekStartOptions } from '../types'
  * const result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
  * //=> Sun Sep 07 2014 23:59:59.999
  */
-export default function endOfWeek(
-  dirtyDate: Date | number,
+export default function endOfWeek<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: LocaleOptions & WeekStartOptions
-): Date {
+): DateType {
   requiredArgs(1, arguments)
 
   const defaultOptions = getDefaultOptions()

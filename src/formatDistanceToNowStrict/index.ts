@@ -76,8 +76,8 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * )
  * //=> '1 jaro'
  */
-export default function formatDistanceToNowStrict(
-  dirtyDate: Date | number,
+export default function formatDistanceToNowStrict<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: LocaleOptions & FormatDistanceStrictOptions
 ): string {
   requiredArgs(1, arguments)

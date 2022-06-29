@@ -88,8 +88,8 @@ import type { FormatDistanceOptions, LocaleOptions } from '../types'
  * )
  * //=> 'pli ol 1 jaro'
  */
-export default function formatDistanceToNow(
-  dirtyDate: Date | number,
+export default function formatDistanceToNow<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: LocaleOptions & FormatDistanceOptions
 ): string {
   requiredArgs(1, arguments)

@@ -1,6 +1,7 @@
-import toInteger from '../_lib/toInteger/index'
 import toDate from '../toDate/index'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
+import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name addDays
@@ -20,7 +21,7 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * const result = addDays(new Date(2014, 8, 1), 10)
  * //=> Thu Sep 11 2014 00:00:00
  */
-export default function addDays<DateType extends Date = Date>(
+export default function addDays<DateType extends Date>(
   dirtyDate: DateType | number,
   dirtyAmount: number
 ): DateType {
@@ -28,12 +29,7 @@ export default function addDays<DateType extends Date = Date>(
 
   const date = toDate(dirtyDate)
   const amount = toInteger(dirtyAmount)
-  if (isNaN(amount)) {
-    return dirtyDate instanceof Date
-      ? // @ts-ignore: TODO find a way to make TypeScript happy about this code
-        new dirtyDate.constructor(NaN)
-      : new Date(NaN)
-  }
+  if (isNaN(amount)) return dateFrom(dirtyDate, NaN)
   if (!amount) {
     // If 0 days, no-op to avoid changing times in the hour before end of DST
     return date

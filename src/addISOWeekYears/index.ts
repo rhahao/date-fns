@@ -1,7 +1,7 @@
-import toInteger from '../_lib/toInteger/index'
 import getISOWeekYear from '../getISOWeekYear/index'
 import setISOWeekYear from '../setISOWeekYear/index'
 import requiredArgs from '../_lib/requiredArgs/index'
+import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name addISOWeekYears
@@ -21,12 +21,12 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * @example
  * // Add 5 ISO week-numbering years to 2 July 2010:
  * const result = addISOWeekYears(new Date(2010, 6, 2), 5)
- * //=> Fri Jun 26 2015 00:00:00
+ * //=> Fri Jn 26 2015 00:00:00
  */
-export default function addISOWeekYears(
-  dirtyDate: Date | number,
+export default function addISOWeekYears<DateType extends Date>(
+  dirtyDate: DateType | number,
   dirtyAmount: number
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   const amount = toInteger(dirtyAmount)

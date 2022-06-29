@@ -44,9 +44,9 @@ import { getRoundingMethod } from '../_lib/roundingMethods/index'
  * )
  * //=> 8
  */
-export default function differenceInWeeks(
-  dateLeft: Date | number,
-  dateRight: Date | number,
+export default function differenceInWeeks<DateType extends Date>(
+  dateLeft: DateType | number,
+  dateRight: DateType | number,
   options?: RoundingOptions
 ): number {
   requiredArgs(2, arguments)

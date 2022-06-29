@@ -336,8 +336,8 @@ const unescapedLatinCharacterRegExp = /[a-zA-Z]/
  * //=> "3 o'clock"
  */
 
-export default function format(
-  dirtyDate: Date | number,
+export default function format<DateType extends Date>(
+  dirtyDate: DateType | number,
   dirtyFormatStr: string,
   options?: LocaleOptions &
     WeekStartOptions &

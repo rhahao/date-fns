@@ -46,9 +46,9 @@ import toInteger from '../_lib/toInteger/index'
  * const result = formatRelative(addDays(new Date(), -6), new Date())
  * //=> "last Thursday at 12:45 AM"
  */
-export default function formatRelative(
-  dirtyDate: Date | number,
-  dirtyBaseDate: Date | number,
+export default function formatRelative<DateType extends Date>(
+  dirtyDate: DateType | number,
+  dirtyBaseDate: DateType | number,
   options?: LocaleOptions & WeekStartOptions
 ): string {
   requiredArgs(2, arguments)

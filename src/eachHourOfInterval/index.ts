@@ -33,10 +33,10 @@ import type { Interval, StepOptions } from '../types'
  * //   Mon Oct 06 2014 15:00:00
  * // ]
  */
-export default function eachHourOfInterval(
-  dirtyInterval: Interval,
+export default function eachHourOfInterval<DateType extends Date>(
+  dirtyInterval: Interval<DateType>,
   options?: StepOptions
-): Date[] {
+): DateType[] {
   requiredArgs(1, arguments)
 
   const interval = dirtyInterval || {}

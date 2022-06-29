@@ -27,9 +27,9 @@ import { getRoundingMethod } from '../_lib/roundingMethods/index'
  * )
  * //=> 12
  */
-export default function differenceInSeconds(
-  dateLeft: Date | number,
-  dateRight: Date | number,
+export default function differenceInSeconds<DateType extends Date>(
+  dateLeft: DateType | number,
+  dateRight: DateType | number,
   options?: RoundingOptions
 ): number {
   requiredArgs(2, arguments)

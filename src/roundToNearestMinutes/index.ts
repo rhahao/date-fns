@@ -1,5 +1,6 @@
-import type { RoundToNearestMinutesOptions } from 'src/types'
+import type { RoundToNearestMinutesOptions } from '../types'
 import toDate from '../toDate/index'
+import dateConstructor from '../_lib/dateConstructor/index'
 import toInteger from '../_lib/toInteger/index'
 
 /**
@@ -29,10 +30,10 @@ import toInteger from '../_lib/toInteger/index'
  * // rounds up because given date is exactly between 12:00:00 and 12:15:00
  * //=> Thu Jul 10 2014 12:15:00
  */
-export default function roundToNearestMinutes(
-  dirtyDate: Date | number,
+export default function roundToNearestMinutes<DateType extends Date>(
+  dirtyDate: DateType | number,
   options?: RoundToNearestMinutesOptions
-): Date {
+): DateType {
   if (arguments.length < 1) {
     throw new TypeError('1 argument required, but only none provided present')
   }
@@ -50,7 +51,7 @@ export default function roundToNearestMinutes(
   const remainderMinutes = minutes % nearestTo
   const addedMinutes = Math.round(remainderMinutes / nearestTo) * nearestTo
 
-  return new Date(
+  return new (dateConstructor(date))(
     date.getFullYear(),
     date.getMonth(),
     date.getDate(),

@@ -43,6 +43,7 @@ export default function toDate<DateType extends Date = Date>(
     (typeof argument === 'object' && argStr === '[object Date]')
   ) {
     // Prevent the date to lose the milliseconds when passed to new Date() in IE10
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: TODO find a way to make TypeScript happy about this code
     return new argument.constructor(argument.getTime())
     // return new Date(argument.getTime())

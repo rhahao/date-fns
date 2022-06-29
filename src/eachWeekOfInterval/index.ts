@@ -39,10 +39,10 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * //   Sun Nov 23 2014 00:00:00
  * // ]
  */
-export default function eachWeekOfInterval(
-  dirtyInterval: Interval,
+export default function eachWeekOfInterval<DateType extends Date>(
+  dirtyInterval: Interval<DateType>,
   options?: LocaleOptions & WeekStartOptions
-): Date[] {
+): DateType[] {
   requiredArgs(1, arguments)
 
   const interval = dirtyInterval || {}

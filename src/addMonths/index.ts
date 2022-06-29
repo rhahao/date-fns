@@ -1,6 +1,7 @@
-import toInteger from '../_lib/toInteger/index'
 import toDate from '../toDate/index'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
+import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name addMonths
@@ -20,17 +21,15 @@ import requiredArgs from '../_lib/requiredArgs/index'
  * const result = addMonths(new Date(2014, 8, 1), 5)
  * //=> Sun Feb 01 2015 00:00:00
  */
-export default function addMonths(
-  dirtyDate: Date | number,
+export default function addMonths<DateType extends Date>(
+  dirtyDate: DateType | number,
   dirtyAmount: number
-): Date {
+): DateType {
   requiredArgs(2, arguments)
 
   const date = toDate(dirtyDate)
   const amount = toInteger(dirtyAmount)
-  if (isNaN(amount)) {
-    return new Date(NaN)
-  }
+  if (isNaN(amount)) return dateFrom(dirtyDate, NaN)
   if (!amount) {
     // If 0 months, no-op to avoid changing times in the hour before end of DST
     return date
@@ -45,7 +44,7 @@ export default function addMonths(
   // we'll default to the end of the desired month by adding 1 to the desired
   // month and using a date of 0 to back up one day to the end of the desired
   // month.
-  const endOfDesiredMonth = new Date(date.getTime())
+  const endOfDesiredMonth = dateFrom(dirtyDate, date.getTime())
   endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0)
   const daysInMonth = endOfDesiredMonth.getDate()
   if (dayOfMonth >= daysInMonth) {
