@@ -9,6 +9,7 @@ import type {
   FirstWeekContainsDateOptions,
 } from '../types'
 import { getDefaultOptions } from '../_lib/defaultOptions/index'
+import dateFrom from '../_lib/dateFrom/index'
 
 /**
  * @name setWeekYear
@@ -70,7 +71,7 @@ export default function setWeekYear<DateType extends Date>(
   let date = toDate(dirtyDate)
   const weekYear = toInteger(dirtyWeekYear)
   const diff = differenceInCalendarDays(date, startOfWeekYear(date, options))
-  const firstWeek = new Date(0)
+  const firstWeek = dateFrom(dirtyDate, 0)
   firstWeek.setFullYear(weekYear, 0, firstWeekContainsDate)
   firstWeek.setHours(0, 0, 0, 0)
   date = startOfWeekYear(firstWeek, options)
