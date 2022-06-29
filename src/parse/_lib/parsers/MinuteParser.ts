@@ -3,6 +3,7 @@ import type { ParseResult, ParseFlags } from '../types'
 import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
 import { parseNumericPattern, parseNDigits } from '../utils'
+import type { UTCDateMini } from '@date-fns/utc'
 
 export class MinuteParser extends Parser<number> {
   priority = 60
@@ -22,8 +23,8 @@ export class MinuteParser extends Parser<number> {
     return value >= 0 && value <= 59
   }
 
-  set(date: Date, _flags: ParseFlags, value: number): Date {
-    date.setUTCMinutes(value, 0, 0)
+  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+    date.setMinutes(value, 0, 0)
     return date
   }
 

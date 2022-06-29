@@ -1,7 +1,8 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags, ParserOptions } from '../types'
+import setDay from '../../../setDay/index'
 import { Parser } from '../Parser'
-import setUTCDay from '../../../_lib/setUTCDay'
+import type { ParseFlags, ParseResult, ParserOptions } from '../types'
 
 // Day of week
 export class DayParser extends Parser<number> {
@@ -53,13 +54,13 @@ export class DayParser extends Parser<number> {
   }
 
   set(
-    date: Date,
+    date: UTCDateMini,
     _flags: ParseFlags,
     value: number,
     options: ParserOptions
-  ): Date {
-    date = setUTCDay(date, value, options)
-    date.setUTCHours(0, 0, 0, 0)
+  ): UTCDateMini {
+    date = setDay(date, value, options)
+    date.setHours(0, 0, 0, 0)
     return date
   }
 

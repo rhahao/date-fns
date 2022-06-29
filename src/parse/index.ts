@@ -1,7 +1,16 @@
-import defaultLocale from '../_lib/defaultLocale/index'
+import { UTCDateMini } from '@date-fns/utc'
+import getDefaultOptions from '../getDefaultOptions/index'
+import defaultLocale from '../locale/en-US/index'
 import subMilliseconds from '../subMilliseconds/index'
 import toDate from '../toDate/index'
+import type {
+  AdditionalTokensOptions,
+  FirstWeekContainsDateOptions,
+  LocaleOptions,
+  WeekStartOptions,
+} from '../types'
 import assign from '../_lib/assign/index'
+import dateFrom from '../_lib/dateFrom/index'
 import longFormatters from '../_lib/format/longFormatters/index'
 import getTimezoneOffsetInMilliseconds from '../_lib/getTimezoneOffsetInMilliseconds/index'
 import {
@@ -9,19 +18,11 @@ import {
   isProtectedWeekYearToken,
   throwProtectedError,
 } from '../_lib/protectedTokens/index'
-import toInteger from '../_lib/toInteger/index'
 import requiredArgs from '../_lib/requiredArgs/index'
-import type { ParserOptions, ParseFlags } from './_lib/types'
-import { Setter, DateToSystemTimezoneSetter } from './_lib/Setter'
+import toInteger from '../_lib/toInteger/index'
 import { parsers } from './_lib/parsers'
-import type {
-  FirstWeekContainsDateOptions,
-  LocaleOptions,
-  WeekStartOptions,
-  AdditionalTokensOptions,
-} from '../types'
-import { getDefaultOptions } from '../_lib/defaultOptions/index'
-import dateFrom from '../_lib/dateFrom/index'
+import { DateToSystemTimezoneSetter, Setter } from './_lib/Setter'
+import type { ParseFlags, ParserOptions } from './_lib/types'
 
 // This RegExp consists of three parts separated by `|`:
 // - [yYQqMLwIdDecihHKkms]o matches any available ordinal number token
@@ -527,7 +528,9 @@ export default function parse<DateType extends Date>(
   }
 
   // Convert the date in system timezone to the same date in UTC+00:00 timezone.
-  let utcDate = subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
+  let utcDate = new UTCDateMini(
+    subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
+  )
 
   const flags: ParseFlags = {}
   for (const setter of uniquePrioritySetters) {

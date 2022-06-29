@@ -1,6 +1,7 @@
 import type { ParserOptions, ParseFlags, ParseResult } from './types'
 import type { Match } from '../../locale/types'
 import { ValueSetter } from './Setter'
+import type { UTCDateMini } from '@date-fns/utc'
 
 export abstract class Parser<TValue> {
   public abstract incompatibleTokens: string[] | '*'
@@ -46,9 +47,9 @@ export abstract class Parser<TValue> {
   }
 
   protected abstract set(
-    date: Date,
+    date: UTCDateMini,
     flags: ParseFlags,
     value: TValue,
     options: ParserOptions
-  ): Date | [Date, ParseFlags]
+  ): UTCDateMini | [UTCDateMini, ParseFlags]
 }

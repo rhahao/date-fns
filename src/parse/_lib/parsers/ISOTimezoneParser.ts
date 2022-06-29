@@ -1,6 +1,7 @@
-import type { ParseResult, ParseFlags } from '../types'
-import { Parser } from '../Parser'
+import { UTCDateMini } from '@date-fns/utc'
 import { timezonePatterns } from '../constants'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
 import { parseTimezonePattern } from '../utils'
 
 // Timezone (ISO-8601)
@@ -32,11 +33,11 @@ export class ISOTimezoneParser extends Parser<number> {
     }
   }
 
-  set(date: Date, flags: ParseFlags, value: number): Date {
+  set(date: UTCDateMini, flags: ParseFlags, value: number): UTCDateMini {
     if (flags.timestampIsSet) {
       return date
     }
-    return new Date(date.getTime() - value)
+    return new UTCDateMini(date.getTime() - value)
   }
 
   incompatibleTokens = ['t', 'T', 'X']

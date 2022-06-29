@@ -1,8 +1,9 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags } from '../types'
-import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
-import { parseNumericPattern, parseNDigits } from '../utils'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
+import { parseNDigits, parseNumericPattern } from '../utils'
 
 export class SecondParser extends Parser<number> {
   priority = 50
@@ -22,8 +23,8 @@ export class SecondParser extends Parser<number> {
     return value >= 0 && value <= 59
   }
 
-  set(date: Date, _flags: ParseFlags, value: number): Date {
-    date.setUTCSeconds(value, 0)
+  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+    date.setSeconds(value, 0)
     return date
   }
 

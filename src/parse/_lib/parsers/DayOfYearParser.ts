@@ -1,8 +1,9 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags } from '../types'
-import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
-import { parseNumericPattern, parseNDigits, isLeapYearIndex } from '../utils'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
+import { isLeapYearIndex, parseNDigits, parseNumericPattern } from '../utils'
 
 export class DayOfYearParser extends Parser<number> {
   priority = 90
@@ -31,9 +32,9 @@ export class DayOfYearParser extends Parser<number> {
     }
   }
 
-  set(date: Date, _flags: ParseFlags, value: number): Date {
-    date.setUTCMonth(0, value)
-    date.setUTCHours(0, 0, 0, 0)
+  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+    date.setMonth(0, value)
+    date.setHours(0, 0, 0, 0)
     return date
   }
 

@@ -1,6 +1,7 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { LocaleDayPeriod, Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags } from '../types'
 import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
 import { dayPeriodEnumToHours } from '../utils'
 
 // in the morning, in the afternoon, in the evening, at night
@@ -50,8 +51,12 @@ export class DayPeriodParser extends Parser<LocaleDayPeriod> {
     }
   }
 
-  set(date: Date, _flags: ParseFlags, value: LocaleDayPeriod): Date {
-    date.setUTCHours(dayPeriodEnumToHours(value), 0, 0, 0)
+  set(
+    date: UTCDateMini,
+    _flags: ParseFlags,
+    value: LocaleDayPeriod
+  ): UTCDateMini {
+    date.setHours(dayPeriodEnumToHours(value), 0, 0, 0)
     return date
   }
 

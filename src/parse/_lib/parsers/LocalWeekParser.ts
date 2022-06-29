@@ -1,10 +1,11 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags, ParserOptions } from '../types'
-import { Parser } from '../Parser'
+import setWeek from '../../../setWeek/index'
+import startOfWeek from '../../../startOfWeek/index'
 import { numericPatterns } from '../constants'
-import { parseNumericPattern, parseNDigits } from '../utils'
-import setUTCWeek from '../../../_lib/setUTCWeek'
-import startOfUTCWeek from '../../../_lib/startOfUTCWeek'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult, ParserOptions } from '../types'
+import { parseNDigits, parseNumericPattern } from '../utils'
 
 // Local week of year
 export class LocalWeekParser extends Parser<number> {
@@ -26,12 +27,12 @@ export class LocalWeekParser extends Parser<number> {
   }
 
   set(
-    date: Date,
+    date: UTCDateMini,
     _flags: ParseFlags,
     value: number,
     options: ParserOptions
-  ): Date {
-    return startOfUTCWeek(setUTCWeek(date, value, options), options)
+  ): UTCDateMini {
+    return startOfWeek(setWeek(date, value, options), options)
   }
 
   incompatibleTokens = [

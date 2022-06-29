@@ -1,8 +1,9 @@
-import { mapValue, parseNDigits, parseNumericPattern } from '../utils'
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
-import type { ParseResult, ParseFlags } from '../types'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
+import { mapValue, parseNDigits, parseNumericPattern } from '../utils'
 
 export class MonthParser extends Parser<number> {
   incompatibleTokens = [
@@ -76,9 +77,9 @@ export class MonthParser extends Parser<number> {
     return value >= 0 && value <= 11
   }
 
-  set(date: Date, _flags: ParseFlags, value: number): Date {
-    date.setUTCMonth(value, 1)
-    date.setUTCHours(0, 0, 0, 0)
+  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+    date.setMonth(value, 1)
+    date.setHours(0, 0, 0, 0)
     return date
   }
 }

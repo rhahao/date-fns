@@ -1,5 +1,6 @@
-import type { ParseResult, ParseFlags } from '../types'
+import type { UTCDateMini } from '@date-fns/utc'
 import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
 import { mapValue, parseNDigits } from '../utils'
 
 export class FractionOfSecondParser extends Parser<number> {
@@ -11,8 +12,8 @@ export class FractionOfSecondParser extends Parser<number> {
     return mapValue(parseNDigits(token.length, dateString), valueCallback)
   }
 
-  set(date: Date, _flags: ParseFlags, value: number): Date {
-    date.setUTCMilliseconds(value)
+  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+    date.setMilliseconds(value)
     return date
   }
 

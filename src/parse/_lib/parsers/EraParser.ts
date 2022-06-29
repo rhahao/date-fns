@@ -1,7 +1,8 @@
+import type { UTCDateMini } from '@date-fns/utc'
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags } from '../types'
 import type { Era } from '../../../types'
 import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
 
 export class EraParser extends Parser<number> {
   priority = 140
@@ -30,10 +31,10 @@ export class EraParser extends Parser<number> {
     }
   }
 
-  set(date: Date, flags: ParseFlags, value: number): Date {
+  set(date: UTCDateMini, flags: ParseFlags, value: number): UTCDateMini {
     flags.era = value
-    date.setUTCFullYear(value, 0, 1)
-    date.setUTCHours(0, 0, 0, 0)
+    date.setFullYear(value, 0, 1)
+    date.setHours(0, 0, 0, 0)
     return date
   }
 
