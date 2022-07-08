@@ -1,4 +1,4 @@
-import { UTCDate } from '@date-fns/utc/date'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import isValid from '../isValid/index'
 import toDate from '../toDate/index'
 import type {
@@ -391,7 +391,7 @@ export default function format<DateType extends Date>(
     throw new RangeError('Invalid time value')
   }
 
-  const utcDate = new UTCDate(0)
+  const utcDate = new UTCDateMini(0)
   utcDate.setFullYear(
     originalDate.getFullYear(),
     originalDate.getMonth(),
