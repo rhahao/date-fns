@@ -1,7 +1,6 @@
 import { UTCDateMini } from '@date-fns/utc'
 import getDefaultOptions from '../getDefaultOptions/index'
 import defaultLocale from '../locale/en-US/index'
-import subMilliseconds from '../subMilliseconds/index'
 import toDate from '../toDate/index'
 import type {
   AdditionalTokensOptions,
@@ -12,7 +11,6 @@ import type {
 import assign from '../_lib/assign/index'
 import dateFrom from '../_lib/dateFrom/index'
 import longFormatters from '../_lib/format/longFormatters/index'
-import getTimezoneOffsetInMilliseconds from '../_lib/getTimezoneOffsetInMilliseconds/index'
 import {
   isProtectedDayOfYearToken,
   isProtectedWeekYearToken,
