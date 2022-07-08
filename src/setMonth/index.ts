@@ -1,7 +1,8 @@
-import toInteger from '../_lib/toInteger/index'
-import toDate from '../toDate/index'
 import getDaysInMonth from '../getDaysInMonth/index'
+import toDate from '../toDate/index'
+import dateFrom from '../_lib/dateFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
+import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name setMonth
@@ -32,7 +33,7 @@ export default function setMonth<DateType extends Date>(
   const year = date.getFullYear()
   const day = date.getDate()
 
-  const dateWithDesiredMonth = new Date(0)
+  const dateWithDesiredMonth = dateFrom(dirtyDate, 0)
   dateWithDesiredMonth.setFullYear(year, month, 15)
   dateWithDesiredMonth.setHours(0, 0, 0, 0)
   const daysInMonth = getDaysInMonth(dateWithDesiredMonth)

@@ -102,12 +102,28 @@ export default function formatRelative<DateType extends Date>(
     token = 'other'
   }
 
-  const utcDate = new UTCDateMini(
-    subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
+  const utcDate = new UTCDateMini(0)
+  utcDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate())
+  utcDate.setHours(
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+    date.getMilliseconds()
   )
-  const utcBaseDate = new UTCDateMini(
-    subMilliseconds(baseDate, getTimezoneOffsetInMilliseconds(baseDate))
+
+  const utcBaseDate = new UTCDateMini(0)
+  utcBaseDate.setFullYear(
+    baseDate.getFullYear(),
+    baseDate.getMonth(),
+    baseDate.getDate()
   )
+  utcBaseDate.setHours(
+    baseDate.getHours(),
+    baseDate.getMinutes(),
+    baseDate.getSeconds(),
+    baseDate.getMilliseconds()
+  )
+
   const formatStr = locale.formatRelative(token, utcDate, utcBaseDate, {
     locale,
     weekStartsOn,

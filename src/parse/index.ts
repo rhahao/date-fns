@@ -528,8 +528,13 @@ export default function parse<DateType extends Date>(
   }
 
   // Convert the date in system timezone to the same date in UTC+00:00 timezone.
-  let utcDate = new UTCDateMini(
-    subMilliseconds(date, getTimezoneOffsetInMilliseconds(date))
+  let utcDate = new UTCDateMini(0)
+  utcDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate())
+  utcDate.setHours(
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+    date.getMilliseconds()
   )
 
   const flags: ParseFlags = {}

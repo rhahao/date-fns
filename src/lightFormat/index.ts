@@ -4,6 +4,7 @@ import getTimezoneOffsetInMilliseconds from '../_lib/getTimezoneOffsetInMillisec
 import isValid from '../isValid/index'
 import subMilliseconds from '../subMilliseconds/index'
 import requiredArgs from '../_lib/requiredArgs/index'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 
 // This RegExp consists of three parts separated by `|`:
 // - (\w)\1* matches any sequences of the same letter
@@ -90,11 +91,18 @@ export default function lightFormat<DateType extends Date>(
     throw new RangeError('Invalid time value')
   }
 
-  // Convert the date in system timezone to the same date in UTC+00:00 timezone.
-  // This ensures that when UTC functions will be implemented, locales will be compatible with them.
-  // See an issue about UTC functions: https://github.com/date-fns/date-fns/issues/376
-  const timezoneOffset = getTimezoneOffsetInMilliseconds(originalDate)
-  const utcDate = subMilliseconds(originalDate, timezoneOffset)
+  const utcDate = new UTCDateMini(0)
+  utcDate.setFullYear(
+    originalDate.getFullYear(),
+    originalDate.getMonth(),
+    originalDate.getDate()
+  )
+  utcDate.setHours(
+    originalDate.getHours(),
+    originalDate.getMinutes(),
+    originalDate.getSeconds(),
+    originalDate.getMilliseconds()
+  )
 
   const tokens = formatStr.match(formattingTokensRegExp)
 
