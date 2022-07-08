@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import differenceInCalendarDays from '../differenceInCalendarDays/index'
 import format from '../format/index'
 import type { FormatRelativeToken } from '../locale/types'

@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc'
+import { UTCDateMini } from '@date-fns/utc/date/mini'
 import getDefaultOptions from '../getDefaultOptions/index'
 import defaultLocale from '../locale/en-US/index'
 import toDate from '../toDate/index'
