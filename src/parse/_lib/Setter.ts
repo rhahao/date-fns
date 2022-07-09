@@ -27,7 +27,7 @@ export class ValueSetter<Value> extends Setter {
     private value: Value,
 
     private validateValue: <DateType extends Date>(
-      utcDate: Date,
+      utcDate: DateType,
       value: Value,
       options: ParserOptions
     ) => boolean,

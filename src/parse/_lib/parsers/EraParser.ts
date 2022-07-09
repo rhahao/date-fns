@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import type { Era } from '../../../types'
 import { Parser } from '../Parser'
@@ -31,7 +30,11 @@ export class EraParser extends Parser<number> {
     }
   }
 
-  set(date: UTCDateMini, flags: ParseFlags, value: number): UTCDateMini {
+  set<DateType extends Date>(
+    date: DateType,
+    flags: ParseFlags,
+    value: number
+  ): DateType {
     flags.era = value
     date.setFullYear(value, 0, 1)
     date.setHours(0, 0, 0, 0)

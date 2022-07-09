@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import getWeekYear from '../../../getWeekYear/index'
 import type { Match } from '../../../locale/types'
 import startOfWeek from '../../../startOfWeek/index'
@@ -36,16 +35,19 @@ export class LocalWeekYearParser extends Parser<YearParserValue> {
     }
   }
 
-  validate(_date: Date, value: YearParserValue): boolean {
+  validate<DateType extends Date>(
+    _date: DateType,
+    value: YearParserValue
+  ): boolean {
     return value.isTwoDigitYear || value.year > 0
   }
 
-  set(
-    date: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     flags: ParseFlags,
     value: YearParserValue,
     options: ParserOptions
-  ): UTCDateMini {
+  ): DateType {
     const currentYear = getWeekYear(date, options)
 
     if (value.isTwoDigitYear) {

@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import { numericPatterns } from '../constants'
 import { Parser } from '../Parser'
@@ -22,7 +21,7 @@ export class DayOfYearParser extends Parser<number> {
     }
   }
 
-  validate(date: Date, value: number): boolean {
+  validate<DateType extends Date>(date: DateType, value: number): boolean {
     const year = date.getUTCFullYear()
     const isLeapYear = isLeapYearIndex(year)
     if (isLeapYear) {
@@ -32,7 +31,11 @@ export class DayOfYearParser extends Parser<number> {
     }
   }
 
-  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+  set<DateType extends Date>(
+    date: DateType,
+    _flags: ParseFlags,
+    value: number
+  ): DateType {
     date.setMonth(0, value)
     date.setHours(0, 0, 0, 0)
     return date

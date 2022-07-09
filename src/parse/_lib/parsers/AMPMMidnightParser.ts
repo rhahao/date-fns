@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { LocaleDayPeriod, Match } from '../../../locale/types'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
@@ -50,11 +49,11 @@ export class AMPMMidnightParser extends Parser<LocaleDayPeriod> {
     }
   }
 
-  set(
-    date: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     _flags: ParseFlags,
     value: LocaleDayPeriod
-  ): UTCDateMini {
+  ): DateType {
     date.setHours(dayPeriodEnumToHours(value), 0, 0, 0)
     return date
   }

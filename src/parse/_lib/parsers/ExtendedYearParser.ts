@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
 import { parseNDigitsSigned } from '../utils'
@@ -14,7 +13,11 @@ export class ExtendedYearParser extends Parser<number> {
     return parseNDigitsSigned(token.length, dateString)
   }
 
-  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+  set<DateType extends Date>(
+    date: DateType,
+    _flags: ParseFlags,
+    value: number
+  ): DateType {
     date.setFullYear(value, 0, 1)
     date.setHours(0, 0, 0, 0)
     return date

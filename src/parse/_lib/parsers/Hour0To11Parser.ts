@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import { numericPatterns } from '../constants'
 import { Parser } from '../Parser'
@@ -19,11 +18,15 @@ export class Hour0To11Parser extends Parser<number> {
     }
   }
 
-  validate(_date: Date, value: number): boolean {
+  validate<DateType extends Date>(_date: DateType, value: number): boolean {
     return value >= 0 && value <= 11
   }
 
-  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+  set<DateType extends Date>(
+    date: DateType,
+    _flags: ParseFlags,
+    value: number
+  ): DateType {
     const isPM = date.getHours() >= 12
     if (isPM && value < 12) {
       date.setHours(value + 12, 0, 0, 0)

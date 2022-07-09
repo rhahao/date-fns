@@ -1,9 +1,8 @@
 import type { Match } from '../../../locale/types'
-import type { ParseResult, ParseFlags } from '../types'
-import { Parser } from '../Parser'
 import { numericPatterns } from '../constants'
-import { parseNumericPattern, parseNDigits, mapValue } from '../utils'
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
+import { Parser } from '../Parser'
+import type { ParseFlags, ParseResult } from '../types'
+import { mapValue, parseNDigits, parseNumericPattern } from '../utils'
 
 export class StandAloneMonthParser extends Parser<number> {
   priority = 110
@@ -58,11 +57,15 @@ export class StandAloneMonthParser extends Parser<number> {
     }
   }
 
-  validate(_date: Date, value: number): boolean {
+  validate<DateType extends Date>(_date: DateType, value: number): boolean {
     return value >= 0 && value <= 11
   }
 
-  set(date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
+  set<DateType extends Date>(
+    date: DateType,
+    _flags: ParseFlags,
+    value: number
+  ): DateType {
     date.setMonth(value, 1)
     date.setHours(0, 0, 0, 0)
     return date

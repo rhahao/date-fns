@@ -45,7 +45,10 @@ export class YearParser extends Parser<YearParserValue> {
     }
   }
 
-  validate(_date: Date, value: YearParserValue): boolean {
+  validate<DateType extends Date>(
+    _date: DateType,
+    value: YearParserValue
+  ): boolean {
     return value.isTwoDigitYear || value.year > 0
   }
 

@@ -37,8 +37,8 @@ export abstract class Parser<Value> {
     options: ParserOptions
   ): ParseResult<Value>
 
-  protected validate(
-    _utcDate: Date,
+  protected validate<DateType extends Date>(
+    _utcDate: DateType,
     _value: Value,
     _options: ParserOptions
   ): boolean {

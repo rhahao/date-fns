@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import setWeek from '../../../setWeek/index'
 import startOfWeek from '../../../startOfWeek/index'
@@ -22,16 +21,16 @@ export class LocalWeekParser extends Parser<number> {
     }
   }
 
-  validate(_date: Date, value: number): boolean {
+  validate<DateType extends Date>(_date: DateType, value: number): boolean {
     return value >= 1 && value <= 53
   }
 
-  set(
-    date: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     _flags: ParseFlags,
     value: number,
     options: ParserOptions
-  ): UTCDateMini {
+  ): DateType {
     return startOfWeek(setWeek(date, value, options), options)
   }
 
