@@ -1679,10 +1679,10 @@
     json-bond "^0.1.0"
     typesaurus "^7.1.0"
 
-"@date-fns/utc@^0.5.5":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@date-fns/utc/-/utc-0.5.5.tgz#a9bcd369a420305bb7d9458bd3152930002cef53"
-  integrity sha512-myDnpgNzHLTPUeMQPSAyaQrCFvPHJZIy/7KZBPgCde7ZRZn4UT0jlNh8uBKngu0bxXUNUnijFa75vALRx9CuBg==
+"@date-fns/utc@1":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@date-fns/utc/-/utc-1.0.0.tgz#c17c693a2a89ddc44acf951ceb2153881c0f78ce"
+  integrity sha512-NjV/AIlmOEhuuFJpQHOEeFl0mxVZIm77/JDSQqu/B43yL7gYDNUfH58I4sRkOCZty2gHoKQfmThtEY/DtTDhhQ==
 
 "@eslint/eslintrc@^0.4.1":
   version "0.4.1"
