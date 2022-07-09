@@ -1,5 +1,5 @@
 import startOfISOWeek from '../../../startOfISOWeek/index'
-import dateFrom from '../../../_lib/dateFrom/index'
+import constructFrom from '../../../constructFrom/index'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
 import { parseNDigitsSigned } from '../utils'
@@ -21,7 +21,7 @@ export class ISOWeekYearParser extends Parser<number> {
     _flags: ParseFlags,
     value: number
   ): DateType {
-    const firstWeekOfYear = dateFrom(date, 0)
+    const firstWeekOfYear = constructFrom(date, 0)
     firstWeekOfYear.setFullYear(value, 0, 4)
     firstWeekOfYear.setHours(0, 0, 0, 0)
     return startOfISOWeek(firstWeekOfYear)

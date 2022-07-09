@@ -1,7 +1,7 @@
 import subDays from '../subDays/index'
 import subMonths from '../subMonths/index'
 import type { Duration } from '../types'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import toInteger from '../_lib/toInteger/index'
 
@@ -50,7 +50,7 @@ export default function sub<DateType extends Date>(
 ): DateType {
   requiredArgs(2, arguments)
 
-  if (!duration || typeof duration !== 'object') return dateFrom(date, NaN)
+  if (!duration || typeof duration !== 'object') return constructFrom(date, NaN)
 
   const years = duration.years ? toInteger(duration.years) : 0
   const months = duration.months ? toInteger(duration.months) : 0
@@ -70,7 +70,7 @@ export default function sub<DateType extends Date>(
   const minutestoSub = minutes + hours * 60
   const secondstoSub = seconds + minutestoSub * 60
   const mstoSub = secondstoSub * 1000
-  const finalDate = dateFrom(date, dateWithoutDays.getTime() - mstoSub)
+  const finalDate = constructFrom(date, dateWithoutDays.getTime() - mstoSub)
 
   return finalDate
 }

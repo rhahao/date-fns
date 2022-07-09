@@ -1,7 +1,7 @@
 import toInteger from '../_lib/toInteger/index'
 import toDate from '../toDate/index'
 import requiredArgs from '../_lib/requiredArgs/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 
 /**
  * @name setYear
@@ -32,7 +32,7 @@ export default function setYear<DateType extends Date>(
 
   // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
   if (isNaN(date.getTime())) {
-    return dateFrom(dirtyDate, NaN)
+    return constructFrom(dirtyDate, NaN)
   }
 
   date.setFullYear(year)

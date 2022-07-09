@@ -2,13 +2,13 @@ import isSaturday from '../isSaturday/index'
 import isSunday from '../isSunday/index'
 import isWeekend from '../isWeekend/index'
 import toDate from '../toDate/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import toInteger from '../_lib/toInteger/index'
 
 /**
  * @name addBusinessDays
- * @category Day Helpers
+ * @category Date Extension Helpers
  * @summary Add the specified number of business days (mon - fri) to the given date.
  *
  * @description
@@ -34,7 +34,7 @@ export default function addBusinessDays<DateType extends Date>(
   const startedOnWeekend = isWeekend(date)
   const amount = toInteger(dirtyAmount)
 
-  if (isNaN(amount)) return dateFrom(dirtyDate, NaN)
+  if (isNaN(amount)) return constructFrom(dirtyDate, NaN)
 
   const hours = date.getHours()
   const sign = amount < 0 ? -1 : 1

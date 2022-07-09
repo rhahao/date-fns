@@ -8,7 +8,7 @@ import type {
   FirstWeekContainsDateOptions,
 } from '../types'
 import { getDefaultOptions } from '../_lib/defaultOptions/index'
-import dateFrom from '../_lib/dateFrom/index'
+import dateFrom from '../constructFrom/index'
 
 /**
  * @name getWeekYear

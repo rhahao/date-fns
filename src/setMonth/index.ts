@@ -1,6 +1,6 @@
 import getDaysInMonth from '../getDaysInMonth/index'
 import toDate from '../toDate/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import toInteger from '../_lib/toInteger/index'
 
@@ -33,7 +33,7 @@ export default function setMonth<DateType extends Date>(
   const year = date.getFullYear()
   const day = date.getDate()
 
-  const dateWithDesiredMonth = dateFrom(dirtyDate, 0)
+  const dateWithDesiredMonth = constructFrom(dirtyDate, 0)
   dateWithDesiredMonth.setFullYear(year, month, 15)
   dateWithDesiredMonth.setHours(0, 0, 0, 0)
   const daysInMonth = getDaysInMonth(dateWithDesiredMonth)

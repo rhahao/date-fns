@@ -1,4 +1,4 @@
-import dateFrom from '../../../_lib/dateFrom/index'
+import constructFrom from '../../../constructFrom/index'
 import { timezonePatterns } from '../constants'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
@@ -39,7 +39,7 @@ export class ISOTimezoneParser extends Parser<number> {
     value: number
   ): DateType {
     if (flags.timestampIsSet) return date
-    return dateFrom(date, date.getTime() - value)
+    return constructFrom(date, date.getTime() - value)
   }
 
   incompatibleTokens = ['t', 'T', 'X']

@@ -8,7 +8,7 @@ import type {
   WeekStartOptions,
 } from '../types'
 import { getDefaultOptions } from '../_lib/defaultOptions/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 
 /**
  * @name startOfWeekYear
@@ -65,7 +65,7 @@ export default function startOfWeekYear<DateType extends Date>(
   )
 
   const year = getWeekYear(dirtyDate, options)
-  const firstWeek = dateFrom(dirtyDate, 0)
+  const firstWeek = constructFrom(dirtyDate, 0)
   firstWeek.setFullYear(year, 0, firstWeekContainsDate)
   firstWeek.setHours(0, 0, 0, 0)
   const date = startOfWeek(firstWeek, options)

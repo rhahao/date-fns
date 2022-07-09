@@ -1,5 +1,5 @@
 import transpose from '../../transpose/index'
-import dateFrom from '../../_lib/dateFrom/index'
+import constructFrom from '../../constructFrom/index'
 import type { ParseFlags, ParserOptions } from './types'
 
 const TIMEZONE_UNIT_PRIORITY = 10
@@ -68,6 +68,6 @@ export class DateToSystemTimezoneSetter extends Setter {
   subPriority = -1
   set<DateType extends Date>(date: DateType, flags: ParseFlags): DateType {
     if (flags.timestampIsSet) return date
-    return dateFrom(date, transpose(date, Date))
+    return constructFrom(date, transpose(date, Date))
   }
 }

@@ -1,6 +1,6 @@
-import type { RoundToNearestMinutesOptions } from '../types'
+import constructFrom from '../constructFrom/index'
 import toDate from '../toDate/index'
-import dateConstructor from '../_lib/dateConstructor/index'
+import type { RoundToNearestMinutesOptions } from '../types'
 import toInteger from '../_lib/toInteger/index'
 
 /**
@@ -51,11 +51,7 @@ export default function roundToNearestMinutes<DateType extends Date>(
   const remainderMinutes = minutes % nearestTo
   const addedMinutes = Math.round(remainderMinutes / nearestTo) * nearestTo
 
-  return new (dateConstructor(date))(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-    date.getHours(),
-    roundedMinutes + addedMinutes
-  )
+  const result = constructFrom(date, date)
+  result.setMinutes(roundedMinutes + addedMinutes, 0, 0)
+  return result
 }

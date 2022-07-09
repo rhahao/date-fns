@@ -1,5 +1,5 @@
 import toDate from '../toDate/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import toInteger from '../_lib/toInteger/index'
 
@@ -29,7 +29,7 @@ export default function addMonths<DateType extends Date>(
 
   const date = toDate(dirtyDate)
   const amount = toInteger(dirtyAmount)
-  if (isNaN(amount)) return dateFrom(dirtyDate, NaN)
+  if (isNaN(amount)) return constructFrom(dirtyDate, NaN)
   if (!amount) {
     // If 0 months, no-op to avoid changing times in the hour before end of DST
     return date
@@ -44,7 +44,7 @@ export default function addMonths<DateType extends Date>(
   // we'll default to the end of the desired month by adding 1 to the desired
   // month and using a date of 0 to back up one day to the end of the desired
   // month.
-  const endOfDesiredMonth = dateFrom(dirtyDate, date.getTime())
+  const endOfDesiredMonth = constructFrom(dirtyDate, date.getTime())
   endOfDesiredMonth.setMonth(date.getMonth() + amount + 1, 0)
   const daysInMonth = endOfDesiredMonth.getDate()
   if (dayOfMonth >= daysInMonth) {

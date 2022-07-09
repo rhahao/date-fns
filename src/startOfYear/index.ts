@@ -1,5 +1,5 @@
 import toDate from '../toDate/index'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 
 /**
@@ -26,7 +26,7 @@ export default function startOfYear<DateType extends Date>(
   requiredArgs(1, arguments)
 
   const cleanDate = toDate(dirtyDate)
-  const date = dateFrom(dirtyDate, 0)
+  const date = constructFrom(dirtyDate, 0)
   date.setFullYear(cleanDate.getFullYear(), 0, 1)
   date.setHours(0, 0, 0, 0)
   return date

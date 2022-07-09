@@ -3,7 +3,7 @@ import setMonth from '../setMonth/index'
 import toInteger from '../_lib/toInteger/index'
 import requiredArgs from '../_lib/requiredArgs/index'
 import type { DateValues } from '../types'
-import dateFrom from '../_lib/dateFrom/index'
+import constructFrom from '../constructFrom/index'
 
 /**
  * @name set
@@ -58,7 +58,7 @@ export default function set<DateType extends Date>(
 
   // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
   if (isNaN(date.getTime())) {
-    return dateFrom(dirtyDate, NaN)
+    return constructFrom(dirtyDate, NaN)
   }
 
   if (values.year != null) {
