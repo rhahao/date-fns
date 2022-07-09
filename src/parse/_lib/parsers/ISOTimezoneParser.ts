@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc/date/mini'
+import dateFrom from '../../../_lib/dateFrom/index'
 import { timezonePatterns } from '../constants'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
@@ -33,11 +33,13 @@ export class ISOTimezoneParser extends Parser<number> {
     }
   }
 
-  set(date: UTCDateMini, flags: ParseFlags, value: number): UTCDateMini {
-    if (flags.timestampIsSet) {
-      return date
-    }
-    return new UTCDateMini(date.getTime() - value)
+  set<DateType extends Date>(
+    date: DateType,
+    flags: ParseFlags,
+    value: number
+  ): DateType {
+    if (flags.timestampIsSet) return date
+    return dateFrom(date, date.getTime() - value)
   }
 
   incompatibleTokens = ['t', 'T', 'X']

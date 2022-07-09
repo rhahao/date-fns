@@ -3,6 +3,7 @@ import differenceInCalendarDays from '../differenceInCalendarDays/index'
 import format from '../format/index'
 import type { FormatRelativeToken } from '../locale/types'
 import toDate from '../toDate/index'
+import transpose from '../transpose/index'
 import type { LocaleOptions, WeekStartOptions } from '../types'
 import defaultLocale from '../_lib/defaultLocale/index'
 import { getDefaultOptions } from '../_lib/defaultOptions/index'
@@ -100,27 +101,8 @@ export default function formatRelative<DateType extends Date>(
     token = 'other'
   }
 
-  const utcDate = new UTCDateMini(0)
-  utcDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate())
-  utcDate.setHours(
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds(),
-    date.getMilliseconds()
-  )
-
-  const utcBaseDate = new UTCDateMini(0)
-  utcBaseDate.setFullYear(
-    baseDate.getFullYear(),
-    baseDate.getMonth(),
-    baseDate.getDate()
-  )
-  utcBaseDate.setHours(
-    baseDate.getHours(),
-    baseDate.getMinutes(),
-    baseDate.getSeconds(),
-    baseDate.getMilliseconds()
-  )
+  const utcDate = transpose(date, UTCDateMini)
+  const utcBaseDate = transpose(date, UTCDateMini)
 
   const formatStr = locale.formatRelative(token, utcDate, utcBaseDate, {
     locale,

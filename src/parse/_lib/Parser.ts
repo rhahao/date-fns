@@ -1,9 +1,8 @@
-import type { ParserOptions, ParseFlags, ParseResult } from './types'
 import type { Match } from '../../locale/types'
 import { ValueSetter } from './Setter'
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
+import type { ParseFlags, ParseResult, ParserOptions } from './types'
 
-export abstract class Parser<TValue> {
+export abstract class Parser<Value> {
   public abstract incompatibleTokens: string[] | '*'
   public abstract priority: number
   public subPriority?: number
@@ -13,14 +12,14 @@ export abstract class Parser<TValue> {
     token: string,
     match: Match,
     options: ParserOptions
-  ): { setter: ValueSetter<TValue>; rest: string } | null {
+  ): { setter: ValueSetter<Value>; rest: string } | null {
     const result = this.parse(dateString, token, match, options)
     if (!result) {
       return null
     }
 
     return {
-      setter: new ValueSetter<TValue>(
+      setter: new ValueSetter<Value>(
         result.value,
         this.validate,
         this.set,
@@ -36,20 +35,20 @@ export abstract class Parser<TValue> {
     token: string,
     match: Match,
     options: ParserOptions
-  ): ParseResult<TValue>
+  ): ParseResult<Value>
 
   protected validate(
     _utcDate: Date,
-    _value: TValue,
+    _value: Value,
     _options: ParserOptions
   ): boolean {
     return true
   }
 
-  protected abstract set(
-    date: UTCDateMini,
+  protected abstract set<DateType extends Date>(
+    date: DateType,
     flags: ParseFlags,
-    value: TValue,
+    value: Value,
     options: ParserOptions
-  ): UTCDateMini | [UTCDateMini, ParseFlags]
+  ): DateType | [DateType, ParseFlags]
 }

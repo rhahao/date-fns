@@ -1,4 +1,5 @@
-import { UTCDateMini } from '@date-fns/utc/date/mini'
+import transpose from '../../transpose/index'
+import dateFrom from '../../_lib/dateFrom/index'
 import type { ParseFlags, ParserOptions } from './types'
 
 const TIMEZONE_UNIT_PRIORITY = 10
@@ -7,31 +8,36 @@ export abstract class Setter {
   public abstract priority: number
   public subPriority = 0
 
-  public validate(_utcDate: Date, _options?: ParserOptions): boolean {
+  public validate<DateType extends Date>(
+    _utcDate: DateType,
+    _options?: ParserOptions
+  ): boolean {
     return true
   }
 
-  public abstract set(
-    utcDate: UTCDateMini,
+  public abstract set<DateType extends Date>(
+    utcDate: DateType,
     flags: ParseFlags,
     options: ParserOptions
-  ): UTCDateMini | [UTCDateMini, ParseFlags]
+  ): DateType | [DateType, ParseFlags]
 }
 
-export class ValueSetter<TValue> extends Setter {
+export class ValueSetter<Value> extends Setter {
   constructor(
-    private value: TValue,
-    private validateValue: (
+    private value: Value,
+
+    private validateValue: <DateType extends Date>(
       utcDate: Date,
-      value: TValue,
+      value: Value,
       options: ParserOptions
     ) => boolean,
-    private setValue: (
-      utcDate: UTCDateMini,
+
+    private setValue: <DateType extends Date>(
+      utcDate: DateType,
       flags: ParseFlags,
-      value: TValue,
+      value: Value,
       options: ParserOptions
-    ) => UTCDateMini | [UTCDateMini, ParseFlags],
+    ) => DateType | [DateType, ParseFlags],
     public priority: number,
     subPriority?: number
   ) {
@@ -41,39 +47,27 @@ export class ValueSetter<TValue> extends Setter {
     }
   }
 
-  validate(utcDate: Date, options: ParserOptions): boolean {
-    return this.validateValue(utcDate, this.value, options)
+  validate<DateType extends Date>(
+    date: DateType,
+    options: ParserOptions
+  ): boolean {
+    return this.validateValue(date, this.value, options)
   }
 
-  set(
-    utcDate: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     flags: ParseFlags,
     options: ParserOptions
-  ): UTCDateMini | [UTCDateMini, ParseFlags] {
-    return this.setValue(utcDate, flags, this.value, options)
+  ): DateType | [DateType, ParseFlags] {
+    return this.setValue(date, flags, this.value, options)
   }
 }
 
 export class DateToSystemTimezoneSetter extends Setter {
   priority = TIMEZONE_UNIT_PRIORITY
   subPriority = -1
-  set(date: UTCDateMini, flags: ParseFlags): UTCDateMini {
-    if (flags.timestampIsSet) {
-      return date
-    }
-
-    const convertedDate = new Date(0)
-    convertedDate.setFullYear(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    )
-    convertedDate.setHours(
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-      date.getMilliseconds()
-    )
-    return new UTCDateMini(convertedDate)
+  set<DateType extends Date>(date: DateType, flags: ParseFlags): DateType {
+    if (flags.timestampIsSet) return date
+    return dateFrom(date, transpose(date, Date))
   }
 }

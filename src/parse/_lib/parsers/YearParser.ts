@@ -1,4 +1,3 @@
-import { UTCDateMini } from '@date-fns/utc/date/mini'
 import type { Match } from '../../../locale/types'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
@@ -50,11 +49,11 @@ export class YearParser extends Parser<YearParserValue> {
     return value.isTwoDigitYear || value.year > 0
   }
 
-  set(
-    date: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     flags: ParseFlags,
     value: YearParserValue
-  ): UTCDateMini {
+  ): DateType {
     const currentYear = date.getFullYear()
 
     if (value.isTwoDigitYear) {

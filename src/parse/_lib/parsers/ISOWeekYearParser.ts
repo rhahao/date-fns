@@ -1,5 +1,5 @@
-import { UTCDateMini } from '@date-fns/utc/date/mini'
 import startOfISOWeek from '../../../startOfISOWeek/index'
+import dateFrom from '../../../_lib/dateFrom/index'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
 import { parseNDigitsSigned } from '../utils'
@@ -16,8 +16,12 @@ export class ISOWeekYearParser extends Parser<number> {
     return parseNDigitsSigned(token.length, dateString)
   }
 
-  set(_date: UTCDateMini, _flags: ParseFlags, value: number): UTCDateMini {
-    const firstWeekOfYear = new UTCDateMini(0)
+  set<DateType extends Date>(
+    date: DateType,
+    _flags: ParseFlags,
+    value: number
+  ): DateType {
+    const firstWeekOfYear = dateFrom(date, 0)
     firstWeekOfYear.setFullYear(value, 0, 4)
     firstWeekOfYear.setHours(0, 0, 0, 0)
     return startOfISOWeek(firstWeekOfYear)

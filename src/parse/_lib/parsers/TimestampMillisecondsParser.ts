@@ -1,4 +1,4 @@
-import { UTCDateMini } from '@date-fns/utc/date/mini'
+import dateFrom from '../../../_lib/dateFrom/index'
 import { Parser } from '../Parser'
 import type { ParseFlags, ParseResult } from '../types'
 import { parseAnyDigitsSigned } from '../utils'
@@ -10,12 +10,12 @@ export class TimestampMillisecondsParser extends Parser<number> {
     return parseAnyDigitsSigned(dateString)
   }
 
-  set(
-    _date: UTCDateMini,
+  set<DateType extends Date>(
+    date: DateType,
     _flags: ParseFlags,
     value: number
-  ): [UTCDateMini, ParseFlags] {
-    return [new UTCDateMini(value), { timestampIsSet: true }]
+  ): [DateType, ParseFlags] {
+    return [dateFrom(date, value), { timestampIsSet: true }]
   }
 
   incompatibleTokens = '*' as const

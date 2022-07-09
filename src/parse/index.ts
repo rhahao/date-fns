@@ -2,6 +2,7 @@ import { UTCDateMini } from '@date-fns/utc/date/mini'
 import getDefaultOptions from '../getDefaultOptions/index'
 import defaultLocale from '../locale/en-US/index'
 import toDate from '../toDate/index'
+import transpose from '../transpose/index'
 import type {
   AdditionalTokensOptions,
   FirstWeekContainsDateOptions,
@@ -525,15 +526,8 @@ export default function parse<DateType extends Date>(
     return dateFrom(dirtyReferenceDate, NaN)
   }
 
-  // Convert the date in system timezone to the same date in UTC+00:00 timezone.
-  let utcDate = new UTCDateMini(0)
-  utcDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate())
-  utcDate.setHours(
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds(),
-    date.getMilliseconds()
-  )
+  // Transpose the date in system timezone to the same date in UTC.
+  let utcDate = transpose(date, UTCDateMini)
 
   const flags: ParseFlags = {}
   for (const setter of uniquePrioritySetters) {
