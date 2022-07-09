@@ -1,4 +1,3 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import isSameWeek from '../../../../isSameWeek/index'
 import type { Day } from '../../../../types'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'
@@ -58,9 +57,9 @@ function nextWeek(day: Day) {
 }
 
 const formatRelativeLocale = {
-  lastWeek: (
-    date: UTCDateMini,
-    baseDate: UTCDateMini,
+  lastWeek: <DateType extends Date>(
+    date: DateType,
+    baseDate: DateType,
     options?: FormatRelativeFnOptions
   ): string => {
     const day = date.getDay() as Day
@@ -73,9 +72,9 @@ const formatRelativeLocale = {
   yesterday: "'вчера в' p",
   today: "'сегодня в' p",
   tomorrow: "'завтра в' p",
-  nextWeek: (
-    date: UTCDateMini,
-    baseDate: UTCDateMini,
+  nextWeek: <DateType extends Date>(
+    date: DateType,
+    baseDate: DateType,
     options?: FormatRelativeFnOptions
   ): string => {
     const day = date.getDay() as Day

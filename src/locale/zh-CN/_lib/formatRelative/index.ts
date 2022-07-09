@@ -1,10 +1,9 @@
-import type { UTCDateMini } from '@date-fns/utc/date/mini'
 import isSameWeek from '../../../../isSameWeek/index'
 import type { FormatRelativeFn, FormatRelativeFnOptions } from '../../../types'
 
 function checkWeek(
-  date: UTCDateMini,
-  baseDate: UTCDateMini,
+  date: Date,
+  baseDate: Date,
   options?: FormatRelativeFnOptions
 ) {
   const baseFormat = 'eeee p'
